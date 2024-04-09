@@ -119,7 +119,7 @@ function OverallTable() {
                         href="https://drive.google.com/file/d/0B0IJZ0wwnhHDc1ZpcU05Mnh2N0U/view?pli=1&resourcekey=0-UfVuudnLhY8V2QZv-Cg6Mw"><i
                         className="fa fa-info-circle"></i></a>
                     </td>
-                    <td style={thTdStyle}></td>
+                    <td style={thTdStyle}>CC-BY 4.0</td>
 
 
                 </tr>
@@ -148,7 +148,7 @@ function OverallTable() {
                         href="https://drive.google.com/file/d/0B0IJZ0wwnhHDc1ZpcU05Mnh2N0U/view?pli=1&resourcekey=0-UfVuudnLhY8V2QZv-Cg6Mw"><i
                         className="fa fa-info-circle"></i></a>
                     </td>
-                    <td style={thTdStyle}></td>
+                    <td style={thTdStyle}>CC-BY 4.0</td>
 
 
                 </tr>
@@ -170,7 +170,7 @@ function OverallTable() {
                         href="https://microsoft.github.io/XGLUE/"><i
                         className="fa fa-info-circle"></i></a>
                     </td>
-                    <td style={thTdStyle}></td>
+                    <td style={thTdStyle}>MIT</td>
 
 
                 </tr>
@@ -185,7 +185,7 @@ function OverallTable() {
                         href="https://microsoft.github.io/XGLUE/"><i
                         className="fa fa-info-circle"></i></a>
                     </td>
-                    <td style={thTdStyle}></td>
+                    <td style={thTdStyle}>MIT</td>
 
 
                 </tr>
@@ -200,7 +200,7 @@ function OverallTable() {
                         href="https://arxiv.org/abs/2004.01401"><i
                         className="fa fa-info-circle"></i></a>
                     </td>
-                    <td style={thTdStyle}></td>
+                    <td style={thTdStyle}>MIT</td>
 
 
                 </tr>
@@ -287,7 +287,7 @@ function OverallTable() {
                         href="https://arxiv.org/abs/2004.01401"><i
                         className="fa fa-info-circle"></i></a>
                     </td>
-                    <td style={thTdStyle}></td>
+                    <td style={thTdStyle}>MIT</td>
 
 
                 </tr>
@@ -347,7 +347,7 @@ function OverallTable() {
                         href="https://drive.google.com/file/d/0B0IJZ0wwnhHDc1ZpcU05Mnh2N0U/view?pli=1&resourcekey=0-UfVuudnLhY8V2QZv-Cg6Mw"><i
                         className="fa fa-info-circle"></i></a>
                     </td>
-                    <td style={thTdStyle}></td>
+                    <td style={thTdStyle}>CC-BY 4.0</td>
 
 
                 </tr>

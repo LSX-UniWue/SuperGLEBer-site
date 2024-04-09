@@ -1,5 +1,4 @@
-{
-  "results_overall": [
+[
     {
       "model": "gbert-base",
       "setting": "lora",
@@ -418,7 +417,7 @@
       "ner": "0.733",
       "tagg_other": "0.772",
       "doc_emb": "0.587",
-      "qa": "-",
+      "qa": "0.864",
       "toxic_comments": "0.678",
       "offensive_lang": "0.528",
       "db_aspect": "0.672",
@@ -450,4 +449,4 @@
       "sim_pawsx": "0.587"
     }
   ]
-}
+
