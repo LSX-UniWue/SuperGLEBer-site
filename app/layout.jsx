@@ -1,8 +1,5 @@
 import '../styles/globals.css';
-import { Inter } from 'next/font/google';
 
-
-const inter = Inter({ subsets: ['latin'] });
 let FONT_HEAD = '18px'
 
 
@@ -10,18 +7,21 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <head>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+                <link rel="stylesheet"
+                      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
                 <title>SuperGLEBer</title>
             </head>
 
             <body>
-                <div id="__next" className="flex flex-col h-full">
-                    <div className="main-content">
-                        <NavBar />
-                        {children}
-                    </div>
-                    <Footer />
+
+            <div id="__next" className="flex flex-col h-full">
+                <div className="main-content">
+                    <NavBar/>
+                    {children}
                 </div>
+                <Footer/>
+            </div>
             </body>
         </html>
     );

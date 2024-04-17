@@ -8,17 +8,27 @@ html, body {
   margin: 0;
 }
 
-#root, #__next {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
 .main-content {
   flex: 1;
 }
 
-tr:hover{
- background:lightgray;
+
+/*Pagination*/
+.tabulator .tabulator-footer .tabulator-page.active {
+    color: #3c81f6
 }
 
+
+.custom-table-style .tabulator-page.active {
+    background-color: #e2e8f0;
+    border-color: #3c81f6;
+}
+
+/*Table borders*/
+.custom-table-style .tabulator .tabulator-header .vertical-line, .tabulator .tabulator-cell.vertical-line {
+    border-right: 1px solid lightgray;
+}
+
+.custom-table-style .tabulator .tabulator-header .tabulator-col, .tabulator .tabulator-col {
+    border-right: none;
+}
