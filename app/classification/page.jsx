@@ -36,7 +36,6 @@ function OverallTable() {
             topic: "Toxicity",
             metric: "macro F1",
             split: "2920/ 324/ 944",
-            download: "",
             more: "https://aclanthology.org/2021.germeval-1.pdf",
             license: ""
         },
@@ -47,9 +46,8 @@ function OverallTable() {
 
             metric: "macro F1",
             split: "4508/ 501/ 3398",
-            download: "",
             more: "https://www.lsv.uni-saarland.de/wp-content/publications/2018/germeval2018_wiegand.pdf",
-            license: ""
+            license: "Creative Commons Attribution 4.0"
         },
         {
             id: 3,
@@ -57,7 +55,6 @@ function OverallTable() {
             topic: "Sentiment",
             metric: "micro F1",
             split: "16200/ 1930/ 2095",
-            download: "",
             more: "https://drive.google.com/file/d/0B0IJZ0wwnhHDc1ZpcU05Mnh2N0U/view?pli=1&resourcekey=0-UfVuudnLhY8V2QZv-Cg6Mw",
             license: "CC-BY 4.0"
         },
@@ -68,7 +65,6 @@ function OverallTable() {
 
             metric: "micro F1",
             split: "2977/ 426/ 851",
-            download: "",
             more: "https://aclanthology.org/2023.konvens-main.21.pdf",
             license: ""
         },
@@ -79,7 +75,6 @@ function OverallTable() {
 
             metric: "micro F1",
             split: "20941/ 2584/ 2566",
-            download: "",
             more: "https://drive.google.com/file/d/0B0IJZ0wwnhHDc1ZpcU05Mnh2N0U/view?pli=1&resourcekey=0-UfVuudnLhY8V2QZv-Cg6Mw",
             license: "CC-BY 4.0"
         },
@@ -89,7 +84,6 @@ function OverallTable() {
             topic: "Matching",
             metric: "Accuracy",
             split: "9000/ 1000/ 10000",
-            download: "",
             more: "https://arxiv.org/abs/2004.01401",
             license: "MIT",
         },
@@ -100,7 +94,6 @@ function OverallTable() {
 
             metric: "Accuracy",
             split: "9000/ 1000/ 10000",
-            download: "",
             more: "https://arxiv.org/abs/2004.01401",
             license: "MIT",
         },
@@ -111,7 +104,6 @@ function OverallTable() {
 
             metric: "Accuracy",
             split: "49129/ 2000/ 2000",
-            download: "",
             more: "https://arxiv.org/abs/2004.01401",
             license: "MIT",
         },
@@ -121,7 +113,6 @@ function OverallTable() {
             topic: "Word Sense Disambiguation",
             metric: "micro F1",
             split: "6249/ 1032/ 2069",
-            download: "",
             more: "https://aclanthology.org/E12-1039.pdf",
             license: "",
         },
@@ -132,9 +123,8 @@ function OverallTable() {
 
             metric: "micro F1",
             split: "6902/ 1488/ 1511",
-            download: "",
             more: "https://konvens.org/proceedings/2021/papers/KONVENS_2021_Disambiguation_ST-Shared_Task_on_the_Disambiguation_of_German_Verbal_Idioms_at_KONVENS_2021.pdf",
-            license: "",
+            license: "Creative Commons Attribution Non Commercial Share Alike 4.0 International",
         },
         {
             id: 11,
@@ -142,7 +132,6 @@ function OverallTable() {
             topic: "Other",
             metric: "macro F1",
             split: "2920/ 324/ 944",
-            download: "",
             more: "https://aclanthology.org/2021.germeval-1.pdf",
             license: "",
         },
@@ -153,7 +142,6 @@ function OverallTable() {
 
             metric: "macro F1",
             split: "2920/ 324/ 944",
-            download: "",
             more: "https://aclanthology.org/2021.germeval-1.pdf",
             license: "",
         },
@@ -164,7 +152,6 @@ function OverallTable() {
 
             metric: "Accuracy",
             split: "9000/ 1000/ 10000",
-            download: "",
             more: "https://arxiv.org/abs/2004.01401",
             license: "MIT",
         },
@@ -175,7 +162,6 @@ function OverallTable() {
 
             metric: "Accuracy",
             split: "2245/ 250/ 5010",
-            download: "",
             more: "https://arxiv.org/abs/2004.01401",
             license: "OANC",
         },
@@ -186,7 +172,6 @@ function OverallTable() {
 
             metric: "macro F1",
             split: "12494/ 1785/ 3570",
-            download: "",
             more: "https://aclanthology.org/2021.argmining-1.9.pdf",
             license: "CC-BY-SA",
         },
@@ -197,7 +182,6 @@ function OverallTable() {
 
             metric: "micro F1",
             split: "13382/ 1487/ 1652",
-            download: "",
             more: "https://aclanthology.org/2023.acl-long.235/",
             license: "CC-BY 4.0",
         },
@@ -208,7 +192,6 @@ function OverallTable() {
 
             metric: "micro F1",
             split: "20941/ 2584/ 2566",
-            download: "",
             more: "https://drive.google.com/file/d/0B0IJZ0wwnhHDc1ZpcU05Mnh2N0U/view?pli=1&resourcekey=0-UfVuudnLhY8V2QZv-Cg6Mw",
             license: "CC-BY 4.0",
         },
@@ -227,22 +210,13 @@ function OverallTable() {
         clearFilter
     } = useTableFilter(data);
 
-    // Define columns for ReactTabulator
     const tableColumns = [
         {title: "Task Name", field: "name", headerMenu: headerMenu},
         {title: "Topic", field: "topic"},
+        {title: "Metric", field: "metric"},
 
         {title: "Train/Val/Test", field: "split"},
-        {
-            title: "Download",
-            field: "download",
-            hozAlign: "center",
-            formatter: function (cell) {
-                let url = cell.getValue();
-                return `<a href="${url}" target="_blank"><i class='fa fa-download' style='color: #3c81f6;'></i></a>`;
 
-            }
-        },
         {
             title: "More",
             field: "more", hozAlign: "center",
@@ -320,7 +294,7 @@ function OverallTable() {
                 layout={"fitData"}
                 options={{
                     pagination: "local",
-                    paginationSize: 10,
+                    paginationSize: 100,
                     paginationSizeSelector: [5, 10, 50, 100],
                     paginationSizeSelectorLayout: "dropdown",
                 }}

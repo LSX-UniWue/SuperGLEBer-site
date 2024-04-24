@@ -1,10 +1,12 @@
+import React from "react";
+
 export default function Home() {
     return (
-        <div className="hero min-h-screen bg-base-200">
+        <div className="hero min-h-screen bg-base-100">
             <div className="hero-content text-center">
                 <div className="w-3/5 space-y-4">
-                    <h1 className="text-5xl font-bold">SuperGLEBer</h1>
-                    <h2 className="text-2xl font-bold py-2">German Language Understanding Evaluation Benchmark</h2>
+                    <h1 className="text-5xl font-bold text-blue-500 relative z-30">SuperGLEBer</h1>
+                    <h2 className="text-2xl  py-2 ">German Language Understanding Evaluation Benchmark</h2>
                     <p className="py-5">
                         We assemble a broad Natural Language Understanding benchmark suite for the German language and
                         consequently evaluate a wide array of existing German-capable models in order to create a better

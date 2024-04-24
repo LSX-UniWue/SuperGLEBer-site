@@ -20,7 +20,7 @@ export default function Leaderboard() {
 function Intro() {
     return (
         <article className="py-10">
-            <h1 className="text-5xl font-bold text-center py-3">Sequence Tagging Tasks</h1>
+            <h1 className="text-5xl font-bold text-center py-5">Sequence Tagging Tasks</h1>
         </article>
     )
 }
@@ -35,7 +35,6 @@ function OverallTable() {
             topic: "NER",
             metric: "micro F1",
             split: "2587/ 287/ 3007",
-            download: "",
             more: "https://arxiv.org/abs/2004.01401",
             license: "MIT"
         },
@@ -45,7 +44,6 @@ function OverallTable() {
             topic: "NER",
             metric: "micro F1",
             split: "3184/ 354/ 858",
-            download: "",
             more: "https://nlpado.de/~sebastian/software/ner/",
             license: "GNU GPL"
         },
@@ -55,7 +53,6 @@ function OverallTable() {
             topic: "NER",
             metric: "micro F1",
             split: "12668/ 1584/ 1584",
-            download: "",
             more: "https://aclanthology.org/K19-1081.pdf",
             license: "CC-BY 4.0"
         },
@@ -65,7 +62,6 @@ function OverallTable() {
             topic: "NER",
             metric: "micro F1",
             split: "24000/ 2200/ 5100",
-            download: "",
             more: "http://www.lrec-conf.org/proceedings/lrec2014/pdf/276_Paper.pdf",
             license: "CC-BY"
         },
@@ -75,7 +71,6 @@ function OverallTable() {
             topic: "NER",
             metric: "micro F1",
             split: "53384/ 6666/ 6673",
-            download: "",
             more: "https://github.com/elenanereiss/Legal-Entity-Recognition",
             license: "CC-BY 4.0"
         },
@@ -85,7 +80,6 @@ function OverallTable() {
             topic: "Other",
             metric: "micro F1",
             split: "14118/ 799/ 977",
-            download: "",
             more: "https://github.com/UniversalPropositions/UP-1.0/tree/master/UP_German",
             license: "CDLA-Sharing-1.0"
         },
@@ -95,7 +89,6 @@ function OverallTable() {
             topic: "Other",
             metric: "micro F1",
             split: "14118/ 799/ 977",
-            download: "",
             more: "https://github.com/UniversalPropositions/UP-1.0/tree/master/UP_German",
             license: "CDLA-Sharing-1.0"
         },
@@ -105,7 +98,6 @@ function OverallTable() {
             topic: "Other",
             metric: "micro F1",
             split: "13382/ 1487/ 1652",
-            download: "",
             more: "https://aclanthology.org/2023.acl-long.235/",
             license: "CC-BY 4.0"
         },
@@ -115,12 +107,12 @@ function OverallTable() {
             topic: "Other",
             metric: "micro F1",
             split: "19432/ 2369/ 2566",
-            download: "",
             more: "https://drive.google.com/file/d/0B0IJZ0wwnhHDc1ZpcU05Mnh2N0U/view?pli=1&resourcekey=0-UfVuudnLhY8V2QZv-Cg6Mw",
             license: "CC-BY 4.0"
         },
 
     ]
+
     const {
         filterField,
         setFilterField,
@@ -133,22 +125,12 @@ function OverallTable() {
         clearFilter
     } = useTableFilter(data);
 
-    // Define columns for ReactTabulator
     const tableColumns = [
         {title: "Task Name", field: "name", headerMenu: headerMenu},
         {title: "Topic", field: "topic"},
+        {title: "Metric", field: "metric"},
 
         {title: "Train/Val/Test", field: "split"},
-        {
-            title: "Download",
-            field: "download",
-            hozAlign: "center",
-            formatter: function (cell) {
-                let url = cell.getValue();
-                return `<a href="${url}" target="_blank"><i class='fa fa-download' style='color: #3c81f6;'></i></a>`;
-
-            }
-        },
         {
             title: "More",
             field: "more", hozAlign: "center",
@@ -227,7 +209,7 @@ function OverallTable() {
                 layout={"fitData"}
                 options={{
                     pagination: "local",
-                    paginationSize: 10,
+                    paginationSize: 100,
                     paginationSizeSelector: [5, 10, 50, 100],
                     paginationSizeSelectorLayout: "dropdown",
                 }}

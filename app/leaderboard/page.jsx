@@ -4,8 +4,14 @@ import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
 import "/styles/globals.css"
 import {ReactTabulator} from "react-tabulator";
 import data from '/public/results.json';
-import {headerMenu, useTableFilter} from "/public/utils";
-
+import {headerMenu, useTableFilter, formatter_avg} from "/public/utils";
+import {
+    computeAverage,
+    computeGlobalAvgClass,
+    computeGlobalAvgSeq,
+    computeLocalAvgClass,
+    computeLocalAvgSeq,
+} from "/public/averages"
 
 export default function Leaderboard() {
     return (
@@ -41,7 +47,7 @@ export default function Leaderboard() {
 function Intro() {
     return (
         <article className="py-10">
-            <h1 className="text-5xl font-bold text-center">Leaderboard</h1>
+            <h1 className="text-5xl font-bold text-center py-5">Leaderboard</h1>
             <p className="text-center py-5">
                 Below you find the current leaderboard for the different tasks.
                 The leaderboard will be updated as new results come in.
@@ -51,7 +57,40 @@ function Intro() {
 }
 
 
+
 function OverallTable() {
+    const keyRestClass = ['engaging_comments', 'factclaiming_comments', 'news_class', 'nli', 'augment_mining', 'massive_intents', 'top_relevance']
+    const keyRestSeq = ['up_pos', 'up_dep', 'seq_massive', 'germeval_opinions']
+
+    const class_avg = computeLocalAvgClass(data)
+    const class_avg_global = computeGlobalAvgClass(class_avg, keyRestClass)
+
+    const class_seq_avg = computeLocalAvgSeq(class_avg_global)
+    const class_seq_avg_global = computeGlobalAvgSeq(class_seq_avg, keyRestSeq)
+
+    const keyQA = ['mlqa','germanquad']
+    const class_seq_qa_global = class_seq_avg_global.map(row => {
+        const averageQA = computeAverage(row, keyQA);
+
+        return {
+            ...row,
+            averageQA: (Math.round(averageQA * 1000) / 1000).toFixed(3),
+
+            };
+        });
+
+     const final_data = class_seq_qa_global.map(row => {
+        const averageClas = parseFloat(row.averageClas);
+        const averageSeq = parseFloat(row.averageSeq);
+        const averageQA = parseFloat(row.averageQA);
+        const sim_pawsx = parseFloat(row.sim_pawsx);
+
+        const totalValues = [averageClas, averageSeq, averageQA, sim_pawsx];
+        const globalAverage = totalValues.length > 0
+            ? (totalValues.reduce((total, value) => total + value, 0) / totalValues.length)
+            : 0;
+        return { ...row, average: (Math.round(globalAverage * 1000) / 1000).toFixed(3) };
+    });
     const {
         filterField,
         setFilterField,
@@ -62,46 +101,61 @@ function OverallTable() {
         filteredData,
         handleFilterChange,
         clearFilter
-    } = useTableFilter(data);
+    } = useTableFilter(final_data);
 
 
     const columns = [
         {
             title: "Model",
             columns: [
-                {title: "Model", field: "model", headerMenu: headerMenu},
+                {title: "Team", field: "team", headerMenu: headerMenu,},
+               {title: "Model", field: "model",  },
                 {title: "Type", field: "model_type"},
 
-                {title: "Setting", field: "setting", hozAlign: "left", cssClass: "vertical-line"},
+                {title: "Setting", field: "setting", hozAlign: "left"},
+                {
+                    title: "Average",
+                    field: "average",
+                    hozAlign: "center", formatter: formatter_avg, formatterParams: {
+                        min: 0,
+                        max: 1,
+                        color: "#c6dcff"
+                    }, cssClass: "vertical-line"
+
+                },
             ],
         },
+
+
         {
             title: "Sentence Classification",
             columns: [
-                {title: "Toxicity", field: "toxicity", hozAlign: "center"},
-                {title: "Sentiment", field: "sentiment", hozAlign: "center"},
-                {title: "Matching", field: "matching", hozAlign: "center"},
-                {title: "WSD", field: "wsd", hozAlign: "center"},
-                {title: "Other", field: "class_other", hozAlign: "center", cssClass: "vertical-line"},
+                {
+                    title: "Toxicity", field: "toxicity", hozAlign: "center", headerTooltip: "macro F1"
+                },
+                {title: "Sentiment", field: "sentiment", hozAlign: "center", headerTooltip: "micro F1"},
+                {title: "Matching", field: "matching", hozAlign: "center", headerTooltip: "Accuracy"},
+                {title: "WSD", field: "wsd", hozAlign: "center", headerTooltip: "micro F1"},
+                {title: "Other", field: "class_other", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "mixed"},
             ],
         },
         {
             title: "Sequence Tagging",
             columns: [
-                {title: "NER", field: "ner", hozAlign: "center"},
-                {title: "Other", field: "tagg_other", hozAlign: "center", cssClass: "vertical-line"},
+                {title: "NER", field: "ner", hozAlign: "center", headerTooltip: "micro F1"},
+                {title: "Other", field: "tagg_other", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "mixed"},
             ],
         },
         {
             title: "Doc. Emb.",
             columns: [
-                {title: "Doc. Emb.", field: "doc_emb", hozAlign: "center", cssClass: "vertical-line"},
+                {title: "Doc. Emb.", field: "doc_emb", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "Pearson Correlation"},
             ],
         },
         {
             title: "QA",
             columns: [
-                {title: "QA", field: "qa", hozAlign: "center", cssClass: "vertical-line"},
+                {title: "QA", field: "qa", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "mixed"},
             ],
         },
     ];
@@ -118,17 +172,16 @@ function OverallTable() {
                         className="appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
                     >
                         <option value="">Select Field</option>
-                        {columns.map((columnGroup) => (
-                            columnGroup.columns.map((column, columnIndex) => (
-                                <option key={columnIndex} value={column.field}>
+                        {columns.map((columnGroup, groupIndex) => (
+                            columnGroup.columns ? columnGroup.columns.map((column, columnIndex) => (
+                                <option key={groupIndex + '-' + columnIndex} value={column.field}>
                                     {column.title}
                                 </option>
-                            ))
+                            )) : null
                         ))}
                     </select>
-
                     <div
-                        className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 ">
+                        className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
                         <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M5.5 7l4.5 4.5L14.5 7h-9z"/>
                         </svg>
@@ -183,7 +236,7 @@ function OverallTable() {
 
                 options={{
                     pagination: "local",
-                    paginationSize: 10,
+                    paginationSize: 100,
                     paginationSizeSelector: [5, 10, 50, 100],
                     paginationSizeSelectorLayout: "dropdown",
                 }}
@@ -197,6 +250,12 @@ function OverallTable() {
 
 
 function ClassificationTable() {
+    const keyRestClass = ['engaging_comments', 'factclaiming_comments', 'news_class', 'nli', 'augment_mining', 'massive_intents', 'top_relevance']
+
+    const class_avg = computeLocalAvgClass(data)
+
+    const class_avg_global = computeGlobalAvgClass(class_avg, keyRestClass)
+
     const {
         filterField,
         setFilterField,
@@ -207,58 +266,144 @@ function ClassificationTable() {
         filteredData,
         handleFilterChange,
         clearFilter
-    } = useTableFilter(data);
+    } = useTableFilter(class_avg_global);
 
     const columns = [
         {
             title: "Model",
             columns: [
-                {title: "Model", field: "model", headerMenu: headerMenu},
+                {title: "Team", field: "team", headerMenu: headerMenu,},
+               {title: "Model", field: "model",  },
                 {title: "Type", field: "model_type"},
 
-                {title: "Setting", field: "setting", hozAlign: "left", cssClass: "vertical-line"},
+                {title: "Setting", field: "setting", hozAlign: "left"},
+                {
+                    title: "Average",
+                    field: "averageClas",
+                    hozAlign: "center", formatter: formatter_avg, formatterParams: {
+                        min: 0,
+                        max: 1,
+                        color: "#c6dcff"
+                    }, cssClass: "vertical-line"
+
+                },
             ]
         },
         {
             title: "Toxicity",
             columns: [
-                {title: "Toxic comments", field: "toxic_comments", hozAlign: "center"},
-                {title: "Offensive Language", field: "offensive_lang", hozAlign: "center", cssClass: "vertical-line"},
+                {title: "Toxic comments", field: "toxic_comments", hozAlign: "center", headerTooltip: "macro F1"},
+                {
+                    title: "Offensive Language",
+                    field: "offensive_lang",
+                    hozAlign: "center",
+                    headerTooltip: "macro F1"
+                },
+                {
+                    title: "Average",
+                    field: "averageToxic",
+                    hozAlign: "center", formatter: formatter_avg, formatterParams: {
+                        min: 0,
+                        max: 1,
+                        color: "#c6dcff"
+                    }, cssClass: "vertical-line"
+
+                },
             ]
         },
         {
             title: "Sentiment",
             columns: [
-                {title: "DB Aspect", field: "db_aspect", hozAlign: "center"},
-                {title: "Hotel Aspect", field: "hotel_aspect", hozAlign: "center"},
-                {title: "Polarity", field: "polarity", hozAlign: "center", cssClass: "vertical-line"},
+                {title: "DB Aspect", field: "db_aspect", hozAlign: "center", headerTooltip: "micro F1"},
+                {title: "Hotel Aspect", field: "hotel_aspect", hozAlign: "center", headerTooltip: "micro F1"},
+                {
+                    title: "Polarity",
+                    field: "polarity",
+                    hozAlign: "center",
+                    headerTooltip: "micro F1"
+                },
+                {
+                    title: "Average",
+                    field: "averageSentiment",
+                    hozAlign: "center", formatter: formatter_avg, formatterParams: {
+                        min: 0,
+                        max: 1,
+                        color: "#c6dcff"
+                    }, cssClass: "vertical-line"
+
+                },
             ]
         },
         {
             title: "Matching",
             columns: [
-                {title: "Query-Ad", field: "query_ad", hozAlign: "center"},
-                {title: "Quest. Ans", field: "quest_ans", hozAlign: "center"},
-                {title: "PAWS-X", field: "paws_x", hozAlign: "center", cssClass: "vertical-line"},
+                {title: "Query-Ad", field: "query_ad", hozAlign: "center", headerTooltip: "Accuracy"},
+                {title: "Quest. Ans", field: "quest_ans", hozAlign: "center", headerTooltip: "Accuracy"},
+                {
+                    title: "PAWS-X",
+                    field: "paws_x",
+                    hozAlign: "center",
+                    headerTooltip: "Accuracy"
+                },
+                {
+                    title: "Average",
+                    field: "averageMatching",
+                    hozAlign: "center", formatter: formatter_avg, formatterParams: {
+                        min: 0,
+                        max: 1,
+                        color: "#c6dcff"
+                    }, cssClass: "vertical-line"
+
+                },
             ]
         },
         {
             title: "WSD",
             columns: [
-                {title: "WebCAGe", field: "webcage", hozAlign: "center"},
-                {title: "Verbal Idioms", field: "verbal_idioms", hozAlign: "center", cssClass: "vertical-line"},
+                {title: "WebCAGe", field: "webcage", hozAlign: "center", headerTooltip: "micro F1"},
+                {
+                    title: "Verbal Idioms",
+                    field: "verbal_idioms",
+                    hozAlign: "center",
+                    headerTooltip: "micro F1"
+                },
+                {
+                    title: "Average",
+                    field: "averageWSD",
+                    hozAlign: "center", formatter: formatter_avg, formatterParams: {
+                        min: 0,
+                        max: 1,
+                        color: "#c6dcff"
+                    }, cssClass: "vertical-line"
+
+                },
             ]
         },
         {
             title: "Other",
             columns: [
-                {title: "Engaging Comments", field: "engaging_comments", hozAlign: "center"},
-                {title: "FactClaiming Comments", field: "factclaiming_comments", hozAlign: "center"},
-                {title: "News Class", field: "news_class", hozAlign: "center"},
-                {title: "NLI", field: "nli", hozAlign: "center"},
-                {title: "Argument Mining", field: "augment_mining", hozAlign: "center"},
-                {title: "MASSIVE: Intents", field: "massive_intents", hozAlign: "center"},
-                {title: "Top Relevance", field: "top_relevance", hozAlign: "center"},
+                {title: "Engaging Comments", field: "engaging_comments", hozAlign: "center", headerTooltip: "macro F1"},
+                {
+                    title: "FactClaiming Comments",
+                    field: "factclaiming_comments",
+                    hozAlign: "center",
+                    headerTooltip: "macro F1"
+                },
+                {title: "News Class", field: "news_class", hozAlign: "center", headerTooltip: "Accuracy"},
+                {title: "NLI", field: "nli", hozAlign: "center", headerTooltip: "Accuracy"},
+                {title: "Argument Mining", field: "augment_mining", hozAlign: "center", headerTooltip: "macro F1"},
+                {title: "MASSIVE: Intents", field: "massive_intents", hozAlign: "center", headerTooltip: "micro F1"},
+                {title: "Top Relevance", field: "top_relevance", hozAlign: "center", headerTooltip: "micro F1",},
+                {
+                    title: "Average",
+                    field: "averageRestClass",
+                    hozAlign: "center", formatter: formatter_avg, formatterParams: {
+                        min: 0,
+                        max: 1,
+                        color: "#c6dcff"
+                    }, cssClass: "vertical-line"
+
+                },
             ]
         }
     ]
@@ -338,7 +483,7 @@ function ClassificationTable() {
 
                 options={{
                     pagination: "local",
-                    paginationSize: 10,
+                    paginationSize: 100,
                     paginationSizeSelector: [5, 10, 50, 100],
                     paginationSizeSelectorLayout: "dropdown",
                 }}
@@ -352,6 +497,12 @@ function ClassificationTable() {
 
 
 function SequenceTaggingTable() {
+    const keyRestSeq = ['up_pos', 'up_dep', 'seq_massive', 'germeval_opinions']
+
+    const seq_avg = computeLocalAvgSeq(data)
+
+    const seq_avg_global = computeGlobalAvgSeq(seq_avg, keyRestSeq)
+
     const {
         filterField,
         setFilterField,
@@ -362,27 +513,52 @@ function SequenceTaggingTable() {
         filteredData,
         handleFilterChange,
         clearFilter
-    } = useTableFilter(data);
+    } = useTableFilter(seq_avg_global);
 
     const columns = [
 
         {
             title: "Model", columns: [
-
-                {title: "Model", field: "model", headerMenu: headerMenu},
+                {title: "Team", field: "team", headerMenu: headerMenu,},
+               {title: "Model", field: "model",  },
                 {title: "Type", field: "model_type"},
 
-                {title: "Setting", field: "setting", hozAlign: "left", cssClass: "vertical-line"},
+                {title: "Setting", field: "setting", hozAlign: "left"},
+                {
+                    title: "Average",
+                    field: "averageSeq",
+                    hozAlign: "center", formatter: formatter_avg, formatterParams: {
+                        min: 0,
+                        max: 1,
+                        color: "#c6dcff"
+                    }, cssClass: "vertical-line"
+
+                },
             ]
         },
         {
             title: "NER", columns: [
 
-                {title: "News", field: "ner_news", hozAlign: "center"},
-                {title: "EuroParl", field: "ner_europarl", hozAlign: "center"},
-                {title: "BioFID", field: "ner_biofid", hozAlign: "center"},
-                {title: "Wiki & News", field: "ner_wiki_news", hozAlign: "center"},
-                {title: "Legal", field: "ner_legal", hozAlign: "center", cssClass: "vertical-line"},
+                {title: "News", field: "ner_news", hozAlign: "center", headerTooltip: "micro F1"},
+                {title: "EuroParl", field: "ner_europarl", hozAlign: "center", headerTooltip: "micro F1"},
+                {title: "BioFID", field: "ner_biofid", hozAlign: "center", headerTooltip: "micro F1"},
+                {title: "Wiki & News", field: "ner_wiki_news", hozAlign: "center", headerTooltip: "micro F1"},
+                {
+                    title: "Legal",
+                    field: "ner_legal",
+                    hozAlign: "center",
+                    headerTooltip: "micro F1"
+                },
+                {
+                    title: "Average",
+                    field: "averageNer",
+                    hozAlign: "center", formatter: formatter_avg, formatterParams: {
+                        min: 0,
+                        max: 1,
+                        color: "#c6dcff"
+                    }, cssClass: "vertical-line"
+
+                },
             ]
         },
 
@@ -390,10 +566,25 @@ function SequenceTaggingTable() {
             title: "Other", columns: [
 
 
-                {title: "UP-POS", field: "up_pos", hozAlign: "center"},
-                {title: "UP-DEP", field: "up_dep", hozAlign: "center"},
-                {title: "MASSIVE", field: "seq_massive", hozAlign: "center"},
-                {title: "GermEval Opinions ", field: "germeval_opinions", hozAlign: "center"},
+                {title: "UP-POS", field: "up_pos", hozAlign: "center", headerTooltip: "micro F1"},
+                {title: "UP-DEP", field: "up_dep", hozAlign: "center", headerTooltip: "micro F1"},
+                {title: "MASSIVE", field: "seq_massive", hozAlign: "center", headerTooltip: "micro F1"},
+                {
+                    title: "GermEval Opinions ",
+                    field: "germeval_opinions",
+                    hozAlign: "center",
+                    headerTooltip: "micro F1"
+                },
+                {
+                    title: "Average",
+                    field: "averageRestSeq",
+                    hozAlign: "center", formatter: formatter_avg, formatterParams: {
+                        min: 0,
+                        max: 1,
+                        color: "#c6dcff"
+                    }, cssClass: "vertical-line"
+
+                },
             ]
         },
 
@@ -476,7 +667,7 @@ function SequenceTaggingTable() {
 
                 options={{
                     pagination: "local",
-                    paginationSize: 10,
+                    paginationSize: 100,
                     paginationSizeSelector: [5, 10, 50, 100],
                     paginationSizeSelectorLayout: "dropdown",
                 }}
@@ -507,7 +698,8 @@ function SimilarityTable() {
         {
             title: "Model", columns: [
 
-                {title: "Model", field: "model", headerMenu: headerMenu},
+                {title: "Team", field: "team", headerMenu: headerMenu,},
+               {title: "Model", field: "model",  },
                 {title: "Type", field: "model_type"},
 
                 {title: "Setting", field: "setting", hozAlign: "left", cssClass: "vertical-line"},
@@ -516,7 +708,7 @@ function SimilarityTable() {
         {
             title: "Sentence Similarity", columns: [
 
-                {title: "Pawsx", field: "sim_pawsx", width: 200, hozAlign: "center"},
+                {title: "Pawsx", field: "sim_pawsx", width: 200, hozAlign: "center", headerTooltip: "Pearson Correlation"},
 
             ]
         },
@@ -599,7 +791,7 @@ function SimilarityTable() {
 
                 options={{
                     pagination: "local",
-                    paginationSize: 10,
+                    paginationSize: 100,
                     paginationSizeSelector: [5, 10, 50, 100],
                     paginationSizeSelectorLayout: "dropdown",
                 }}
@@ -613,6 +805,22 @@ function SimilarityTable() {
 
 
 function QATable() {
+
+    const keyQA = ['mlqa','germanquad']
+
+
+    const computeDataWithAverages = data.map(row => {
+        const averageQA = computeAverage(row, keyQA);
+
+        return {
+            ...row,
+            averageQA: (Math.round(averageQA * 1000) / 1000).toFixed(3),
+
+
+            };
+        });
+
+
     const {
         filterField,
         setFilterField,
@@ -623,17 +831,29 @@ function QATable() {
         filteredData,
         handleFilterChange,
         clearFilter
-    } = useTableFilter(data);
+    } = useTableFilter(computeDataWithAverages);
+
 
     const columns = [
 
         {
             title: "Model", columns: [
+                {title: "Team", field: "team", headerMenu: headerMenu,},
+               {title: "Model", field: "model",  },
 
-                {title: "Model", field: "model", headerMenu: headerMenu},
                 {title: "Type", field: "model_type"},
 
-                {title: "Setting", field: "setting", hozAlign: "left", cssClass: "vertical-line"},
+                {title: "Setting", field: "setting", hozAlign: "left"},
+                {
+                    title: "Average",
+                    field: "averageQA",
+                    hozAlign: "center", formatter: formatter_avg, formatterParams: {
+                        min: 0,
+                        max: 1,
+                        color: "#c6dcff"
+                    }, cssClass: "vertical-line"
+
+                },
             ]
         },
         {
@@ -642,9 +862,11 @@ function QATable() {
                 {
                     title: "MLQA",
                     field: "mlqa",
-                    hozAlign: "center"
+                    hozAlign: "center",
+                    headerTooltip: "mean-token"
+
                 },
-                {title: "GermQUAD", field: "germanquad", hozAlign: "center"},
+                {title: "GermQUAD", field: "germanquad", hozAlign: "center", headerTooltip: "F1"},
 
 
             ]
@@ -729,7 +951,7 @@ function QATable() {
 
                 options={{
                     pagination: "local",
-                    paginationSize: 10,
+                    paginationSize: 100,
                     paginationSizeSelector: [5, 10, 50, 100],
                     paginationSizeSelectorLayout: "dropdown",
                 }}

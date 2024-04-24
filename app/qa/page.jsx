@@ -32,16 +32,16 @@ function OverallTable() {
         {
             id: 1,
             name: "GermanQUAD",
+            metric: "F1",
             split: "11518/2204",
-            download: "",
             more: "https://aclanthology.org/2021.mrqa-1.4.pdf",
             license: "cc-by-4.0"
         },
         {
             id: 2,
             name: "MLQA",
+            metric: "mean-token",
             split: "512/4517",
-            download: "",
             more: "https://arxiv.org/abs/2004.01401",
             license: "CC-BY-SA 3.0"
         }
@@ -62,17 +62,8 @@ function OverallTable() {
     // Define columns for ReactTabulator
     const tableColumns = [
         {title: "Task Name", field: "name", headerMenu: headerMenu},
+        {title: "Metric", field: "metric"},
         {title: "Train/Test", field: "split"},
-        {
-            title: "Download",
-            field: "download",
-            hozAlign: "center",
-            formatter: function (cell) {
-                let url = cell.getValue();
-                return `<a href="${url}" target="_blank"><i class='fa fa-download' style='color: #3c81f6;'></i></a>`;
-
-            }
-        },
         {
             title: "More",
             field: "more", hozAlign: "center",
@@ -151,7 +142,7 @@ function OverallTable() {
                 layout={"fitData"}
                 options={{
                     pagination: "local",
-                    paginationSize: 10,
+                    paginationSize: 100,
                     paginationSizeSelector: [5, 10, 50, 100],
                     paginationSizeSelectorLayout: "dropdown",
                 }}
