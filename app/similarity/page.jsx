@@ -31,7 +31,7 @@ function OverallTable() {
     const data = [
         {
             id: 1,
-            name: "Embedding Pawsx",
+            name: "Pawsx",
             metric: "Pearson Correlation",
             split: "49401/ 2000/ 2000",
             more: "https://aclanthology.org/D19-1382/",

@@ -393,7 +393,7 @@ function ClassificationTable() {
                 {title: "NLI", field: "nli", hozAlign: "center", headerTooltip: "Accuracy"},
                 {title: "Argument Mining", field: "augment_mining", hozAlign: "center", headerTooltip: "macro F1"},
                 {title: "MASSIVE: Intents", field: "massive_intents", hozAlign: "center", headerTooltip: "micro F1"},
-                {title: "Top Relevance", field: "top_relevance", hozAlign: "center", headerTooltip: "micro F1",},
+                {title: "Topic Relevance", field: "top_relevance", hozAlign: "center", headerTooltip: "micro F1",},
                 {
                     title: "Average",
                     field: "averageRestClass",
