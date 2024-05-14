@@ -147,9 +147,9 @@ function OverallTable() {
             ],
         },
         {
-            title: "Doc. Emb.",
+            title: "Sentence Similarity",
             columns: [
-                {title: "Doc. Emb.", field: "doc_emb", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "Pearson Correlation"},
+                {title: "Sentence Similarity", field: "doc_emb", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "Pearson Correlation"},
             ],
         },
         {
