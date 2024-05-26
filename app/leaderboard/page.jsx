@@ -59,8 +59,8 @@ function Intro() {
 
 
 function OverallTable() {
-    const keyRestClass = ['engaging_comments', 'factclaiming_comments', 'news_class', 'nli', 'augment_mining', 'massive_intents', 'top_relevance']
-    const keyRestSeq = ['up_pos', 'up_dep', 'seq_massive', 'germeval_opinions']
+    const keyRestClass = ['engaging_comments', 'factclaiming_comments', 'news_class', 'nli', 'argument_mining', 'massive_intents', 'topic_relevance']
+    const keyRestSeq = ['up_pos', 'up_dep', 'massive_seq', 'germeval_opinions']
 
     const class_avg = computeLocalAvgClass(data)
     const class_avg_global = computeGlobalAvgClass(class_avg, keyRestClass)
@@ -80,12 +80,13 @@ function OverallTable() {
         });
 
      const final_data = class_seq_qa_global.map(row => {
+
         const averageClas = parseFloat(row.averageClas);
         const averageSeq = parseFloat(row.averageSeq);
         const averageQA = parseFloat(row.averageQA);
-        const sim_pawsx = parseFloat(row.sim_pawsx);
+        const similarity_pawsx = parseFloat(row.similarity_pawsx);
 
-        const totalValues = [averageClas, averageSeq, averageQA, sim_pawsx];
+        const totalValues = [averageClas, averageSeq, averageQA, similarity_pawsx];
         const globalAverage = totalValues.length > 0
             ? (totalValues.reduce((total, value) => total + value, 0) / totalValues.length)
             : 0;
@@ -131,31 +132,31 @@ function OverallTable() {
             title: "Sentence Classification",
             columns: [
                 {
-                    title: "Toxicity", field: "toxicity", hozAlign: "center", headerTooltip: "macro F1"
+                    title: "Toxicity", field: "averageToxic", hozAlign: "center", headerTooltip: "macro F1"
                 },
-                {title: "Sentiment", field: "sentiment", hozAlign: "center", headerTooltip: "micro F1"},
-                {title: "Matching", field: "matching", hozAlign: "center", headerTooltip: "Accuracy"},
-                {title: "WSD", field: "wsd", hozAlign: "center", headerTooltip: "micro F1"},
-                {title: "Other", field: "class_other", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "mixed"},
+                {title: "Sentiment", field: "averageSentiment", hozAlign: "center", headerTooltip: "micro F1"},
+                {title: "Matching", field: "averageMatching", hozAlign: "center", headerTooltip: "Accuracy"},
+                {title: "WSD", field: "averageWSD", hozAlign: "center", headerTooltip: "micro F1"},
+                {title: "Other", field: "averageRestClass", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "mixed"},
             ],
         },
         {
             title: "Sequence Tagging",
             columns: [
-                {title: "NER", field: "ner", hozAlign: "center", headerTooltip: "micro F1"},
-                {title: "Other", field: "tagg_other", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "mixed"},
+                {title: "NER", field: "averageNer", hozAlign: "center", headerTooltip: "micro F1"},
+                {title: "Other", field: "averageRestSeq", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "mixed"},
             ],
         },
         {
             title: "Sentence Similarity",
             columns: [
-                {title: "Sentence Similarity", field: "doc_emb", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "Pearson Correlation"},
+                {title: "Sentence Similarity", field: "similarity_pawsx", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "Pearson Correlation"},
             ],
         },
         {
             title: "QA",
             columns: [
-                {title: "QA", field: "qa", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "mixed"},
+                {title: "QA", field: "averageQA", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "mixed"},
             ],
         },
     ];
@@ -250,7 +251,7 @@ function OverallTable() {
 
 
 function ClassificationTable() {
-    const keyRestClass = ['engaging_comments', 'factclaiming_comments', 'news_class', 'nli', 'augment_mining', 'massive_intents', 'top_relevance']
+    const keyRestClass = ['engaging_comments', 'factclaiming_comments', 'news_class', 'nli', 'argument_mining', 'massive_intents', 'topic_relevance']
 
     const class_avg = computeLocalAvgClass(data)
 
@@ -341,7 +342,7 @@ function ClassificationTable() {
                 {title: "Quest. Ans", field: "quest_ans", hozAlign: "center", headerTooltip: "Accuracy"},
                 {
                     title: "PAWS-X",
-                    field: "paws_x",
+                    field: "pawsx",
                     hozAlign: "center",
                     headerTooltip: "Accuracy"
                 },
@@ -391,9 +392,9 @@ function ClassificationTable() {
                 },
                 {title: "News Class", field: "news_class", hozAlign: "center", headerTooltip: "Accuracy"},
                 {title: "NLI", field: "nli", hozAlign: "center", headerTooltip: "Accuracy"},
-                {title: "Argument Mining", field: "augment_mining", hozAlign: "center", headerTooltip: "macro F1"},
+                {title: "Argument Mining", field: "argument_mining", hozAlign: "center", headerTooltip: "macro F1"},
                 {title: "MASSIVE: Intents", field: "massive_intents", hozAlign: "center", headerTooltip: "micro F1"},
-                {title: "Topic Relevance", field: "top_relevance", hozAlign: "center", headerTooltip: "micro F1",},
+                {title: "Topic Relevance", field: "topic_relevance", hozAlign: "center", headerTooltip: "micro F1",},
                 {
                     title: "Average",
                     field: "averageRestClass",
@@ -497,7 +498,7 @@ function ClassificationTable() {
 
 
 function SequenceTaggingTable() {
-    const keyRestSeq = ['up_pos', 'up_dep', 'seq_massive', 'germeval_opinions']
+    const keyRestSeq = ['up_pos', 'up_dep', 'massive_seq', 'germeval_opinions']
 
     const seq_avg = computeLocalAvgSeq(data)
 
@@ -568,7 +569,7 @@ function SequenceTaggingTable() {
 
                 {title: "UP-POS", field: "up_pos", hozAlign: "center", headerTooltip: "micro F1"},
                 {title: "UP-DEP", field: "up_dep", hozAlign: "center", headerTooltip: "micro F1"},
-                {title: "MASSIVE", field: "seq_massive", hozAlign: "center", headerTooltip: "micro F1"},
+                {title: "MASSIVE", field: "massive_seq", hozAlign: "center", headerTooltip: "micro F1"},
                 {
                     title: "GermEval Opinions ",
                     field: "germeval_opinions",
@@ -708,7 +709,7 @@ function SimilarityTable() {
         {
             title: "Sentence Similarity", columns: [
 
-                {title: "Pawsx", field: "sim_pawsx", width: 200, hozAlign: "center", headerTooltip: "Pearson Correlation"},
+                {title: "Pawsx", field: "similarity_pawsx", width: 200, hozAlign: "center", headerTooltip: "Pearson Correlation"},
 
             ]
         },

@@ -14,9 +14,9 @@ export const computeAverage = (row, keys) => {
 export const computeLocalAvgClass = (data) => {
     const keyToxic = ['toxic_comments', 'offensive_lang']
     const keySentiment = ['db_aspect', 'hotel_aspect', 'polarity']
-    const keyMatching = ['query_ad', 'quest_ans', 'paws_x' ]
+    const keyMatching = ['query_ad', 'quest_ans', 'pawsx' ]
     const keyWSD = ['webcage', 'verbal_idioms']
-    const keyRestClass = ['engaging_comments', 'factclaiming_comments', 'news_class', 'nli', 'augment_mining', 'massive_intents', 'top_relevance']
+    const keyRestClass = ['engaging_comments', 'factclaiming_comments', 'news_class', 'nli', 'argument_mining', 'massive_intents', 'topic_relevance']
 
     return data.map(row => {
         const averageToxic = computeAverage(row, keyToxic);
@@ -57,7 +57,7 @@ export const computeGlobalAvgClass = (data, keyRestClass) => {
 
 export const computeLocalAvgSeq = (data) => {
     const keyNer = ['ner_news', 'ner_europarl', 'ner_biofid', 'ner_wiki_news', 'ner_legal']
-    const keyRestSeq = ['up_pos', 'up_dep', 'seq_massive', 'germeval_opinions']
+    const keyRestSeq = ['up_pos', 'up_dep', 'massive_seq', 'germeval_opinions']
 
     return data.map(row => {
         const averageNer = computeAverage(row, keyNer);
