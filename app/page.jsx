@@ -21,7 +21,7 @@ export default function Home() {
                     </p>
                     <div className="flex justify-between mt-60">
                         <button className="btn bg-blue-500 flex-1 mr-2 ">
-                            <a href="./leaderboard" className="text-white ">
+                            <a href="./leaderboard_v1" className="text-white ">
                                 <span className="fa fa-trophy mr-2"></span>
                                 Leaderboard
                             </a>
