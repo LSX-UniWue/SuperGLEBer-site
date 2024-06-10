@@ -59,7 +59,14 @@ export function NavBar() {
                                     <li><a href="./qa">Question Answering</a></li>
                                 </ul>
                             </li>
-                            <li style={{fontSize: FONT_HEAD}}><a href="./leaderboard">Leaderboard</a></li>
+                            <li style={{fontSize: FONT_HEAD}}><a href="./leaderboard">Leaderboard</a>
+                                <ul className="p-2">
+                                    <li><a href="./leaderboard_v1">Leaderboard v1</a></li>
+                                    <li><a href="./leaderboard_v09">Leaderboard v0.9</a></li>
+                                </ul>
+
+
+                            </li>
                             <li style={{fontSize: FONT_HEAD}}><a>Paper</a></li>
                             <li style={{fontSize: FONT_HEAD}}><a>Code</a></li>
                             <li style={{fontSize: FONT_HEAD}}><a href="./submit">Submit</a></li>
@@ -72,7 +79,7 @@ export function NavBar() {
                         <li>
                             <details>
                                 <summary style={{fontSize: FONT_HEAD}}>Tasks</summary>
-                                <ul className="p-2 text-black" style={dropdownStyle}>
+                                <ul className="p-2 text-black" style={{...dropdownStyle, display: 'flex', flexDirection: 'column', padding: '5px'}}>
                                     <li><a href="./classification">Classification</a></li>
                                     <li><a href="./sequencetagger">Sequence Tagging</a></li>
                                     <li><a href="./similarity">Sentence Similarity</a></li>
@@ -80,7 +87,16 @@ export function NavBar() {
                                 </ul>
                             </details>
                         </li>
-                        <li style={{fontSize: FONT_HEAD}}><a href="./leaderboard">Leaderboard</a></li>
+                        <li>
+                            <details>
+                                <summary style={{fontSize: FONT_HEAD}}><a href="./leaderboard_v1">Leaderboard</a></summary>
+                                <ul className="p-2 text-black" style={{...dropdownStyle, display: 'flex', flexDirection: 'column', padding: '5px'}}>
+                                    <li><a href="./leaderboard_v1">Leaderboard v1</a></li>
+                                    <li><a href="./leaderboard_v09">Leaderboard v0.9</a></li>
+                                </ul>
+                            </details>
+                        </li>
+
                         <li style={{fontSize: FONT_HEAD}}><a>Paper</a></li>
                         <li style={{fontSize: FONT_HEAD}}><a>Code</a></li>
                         <li style={{fontSize: FONT_HEAD}}><a href="./submit">Submit</a></li>

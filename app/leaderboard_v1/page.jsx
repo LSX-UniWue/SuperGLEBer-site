@@ -3,7 +3,7 @@ import React from "react";
 import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
 import "/styles/globals.css"
 import {ReactTabulator} from "react-tabulator";
-import data from '/public/results.json';
+import data from '/public/results_new.json';
 import {headerMenu, useTableFilter, formatter_avg} from "/public/utils";
 import {
     computeAverage,
@@ -47,15 +47,21 @@ export default function Leaderboard() {
 function Intro() {
     return (
         <article className="py-10">
-            <h1 className="text-5xl font-bold text-center py-5">Leaderboard</h1>
-            <p className="text-center py-5">
-                Below you find the current leaderboard for the different tasks.
+            <h1 className="text-5xl font-bold text-center py-5">Leaderboard V1</h1>
+            <p className="text-center py-7">
+                Below you can find the current leaderboard for the different tasks.
+            </p>
+            <p className="text-center">
+                Compared to the previous V0.9 version, we updated several packages to more recent versions resulting in
+                different results. All tasks and settings remain the same.
+            </p>
+            <p className="text-center">
                 The leaderboard will be updated as new results come in.
             </p>
+
         </article>
     )
 }
-
 
 
 function OverallTable() {
