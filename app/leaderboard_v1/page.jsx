@@ -35,10 +35,11 @@ export default function Leaderboard() {
                  style={{width: 'auto', maxWidth: '100%', margin: '0 auto', overflowX: 'auto'}}>
                 <SimilarityTable/>
             </div>
+            {/*
             <div className="QATable" style={{width: 'auto', maxWidth: '100%', margin: '0 auto', overflowX: 'auto'}}>
                 <QATable/>
             </div>
-
+            */}
         </div>
     );
 }
@@ -52,8 +53,9 @@ function Intro() {
                 Below you can find the current leaderboard for the different tasks.
             </p>
             <p className="text-center">
-                Compared to the previous V0.9 version, we updated several packages to more recent versions resulting in
-                different results. All tasks and settings remain the same.
+                Compared to the previous <a href="leaderboard_v09" style={{color: 'cornflowerblue'}}>V0.9
+                version</a> used in our paper, we updated several packages to more recent versions leading to different results.
+                All tasks and settings remain the same.
             </p>
             <p className="text-center">
                 The leaderboard will be updated as new results come in.
@@ -159,12 +161,14 @@ function OverallTable() {
                 {title: "Sentence Similarity", field: "similarity_pawsx", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "Pearson Correlation"},
             ],
         },
+        {/*
         {
             title: "QA",
             columns: [
                 {title: "QA", field: "averageQA", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "mixed"},
             ],
         },
+        */}
     ];
 
 
@@ -810,7 +814,7 @@ function SimilarityTable() {
     )
 }
 
-
+{/*
 function QATable() {
 
     const keyQA = ['mlqa','germanquad']
@@ -971,3 +975,4 @@ function QATable() {
     )
 }
 
+*/}
