@@ -29,7 +29,7 @@ export default function Home() {
 
 
                         <button className="btn bg-blue-500 flex-1 mx-2 ">
-                            <a href="paper.pdf" target="_blank" className="text-white ">
+                            <a href="https://aclanthology.org/2024.naacl-long.438/" className="text-white ">
                                 <span className="fa fa-file-text mr-2"></span>
                                 Paper
                             </a>
