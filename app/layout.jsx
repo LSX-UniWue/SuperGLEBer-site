@@ -96,8 +96,8 @@ export function NavBar() {
                                 </ul>
                             </details>
                         </li>
-                        <li style={{fontSize: FONT_HEAD}}><a href="https://aclanthology.org/2024.naacl-long.438/">Paper</a></li>
-                        <li style={{fontSize: FONT_HEAD}}><a href="https://github.com/LSX-UniWue/SuperGLEBer">Code</a></li>
+                        <li style={{fontSize: FONT_HEAD}}><a href="https://aclanthology.org/2024.naacl-long.438/" target="_blank">Paper</a></li>
+                        <li style={{fontSize: FONT_HEAD}}><a href="https://github.com/LSX-UniWue/SuperGLEBer" target="_blank">Code</a></li>
                         <li style={{fontSize: FONT_HEAD}}><a href="./submit">Submit</a></li>
                     </ul>
                 </div>

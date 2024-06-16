@@ -29,14 +29,14 @@ export default function Home() {
 
 
                         <button className="btn bg-blue-500 flex-1 mx-2 ">
-                            <a href="https://aclanthology.org/2024.naacl-long.438/" className="text-white ">
+                            <a href="https://aclanthology.org/2024.naacl-long.438/" target="_blank" className="text-white ">
                                 <span className="fa fa-file-text mr-2"></span>
                                 Paper
                             </a>
                         </button>
 
                         <button className="btn bg-blue-500 flex-1 ml-2 ">
-                            <a href="https://github.com/LSX-UniWue/SuperGLEBer" className="text-white ">
+                            <a href="https://github.com/LSX-UniWue/SuperGLEBer" target="_blank" className="text-white ">
                                 <span className="fa fa-file-code mr-2"></span>
                                 Code
                             </a>
