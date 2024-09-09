@@ -35,11 +35,9 @@ export default function Leaderboard() {
                  style={{width: 'auto', maxWidth: '100%', margin: '0 auto', overflowX: 'auto'}}>
                 <SimilarityTable/>
             </div>
-            {/*
             <div className="QATable" style={{width: 'auto', maxWidth: '100%', margin: '0 auto', overflowX: 'auto'}}>
                 <QATable/>
             </div>
-            */}
         </div>
     );
 }
@@ -161,14 +159,12 @@ function OverallTable() {
                 {title: "Sentence Similarity", field: "similarity_pawsx", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "Pearson Correlation"},
             ],
         },
-        {/*
         {
             title: "QA",
             columns: [
                 {title: "QA", field: "averageQA", hozAlign: "center", cssClass: "vertical-line", headerTooltip: "mixed"},
             ],
         },
-        */}
     ];
 
 
@@ -814,7 +810,7 @@ function SimilarityTable() {
     )
 }
 
-{/*
+
 function QATable() {
 
     const keyQA = ['mlqa','germanquad']
@@ -975,4 +971,3 @@ function QATable() {
     )
 }
 
-*/}

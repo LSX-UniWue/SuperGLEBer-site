@@ -32,9 +32,9 @@
     "up_dep": "0.902",
     "massive_seq": "0.898",
     "germeval_opinions": "0.486",
-    "mlqa": "0.843",
+    "mlqa": "0.823",
     "germanquad": "0.783",
-    "similarity_pawsx": "0.632"
+    "similarity_pawsx": "0.561"
   },
   {
     "model": "gbert-large",
@@ -69,9 +69,9 @@
     "up_dep": "0.910",
     "massive_seq": "0.905",
     "germeval_opinions": "0.503",
-    "mlqa": "0.847",
-    "germanquad": "0.805",
-    "similarity_pawsx": "0.670"
+    "mlqa": "0.862",
+    "germanquad": "0.803",
+    "similarity_pawsx": "0.654"
   },
   {
     "model": "gottbert",
@@ -106,9 +106,9 @@
     "up_dep": "0.896",
     "massive_seq": "0.888",
     "germeval_opinions": "0.456",
-    "mlqa": "0.736",
-    "germanquad": "0.787",
-    "similarity_pawsx": "0.623"
+    "mlqa": "0.797",
+    "germanquad": "0.793",
+    "similarity_pawsx": "0.553"
   },
   {
     "model": "bert-base-german-cased",
@@ -143,9 +143,9 @@
     "up_dep": "0.897",
     "massive_seq": "0.875",
     "germeval_opinions": "0.446",
-    "mlqa": "0.836",
-    "germanquad": "0.769",
-    "similarity_pawsx": "0.616"
+    "mlqa": "0.796",
+    "germanquad": "0.781",
+    "similarity_pawsx": "0.537"
   },
   {
     "model": "mbart-large-50",
@@ -180,9 +180,9 @@
     "up_dep": "0.902",
     "massive_seq": "0.903",
     "germeval_opinions": "0.448",
-    "mlqa": "0.849",
-    "germanquad": "0.808",
-    "similarity_pawsx": "0.627"
+    "mlqa": "0.847",
+    "germanquad": "0.694",
+    "similarity_pawsx": "0.358"
   },
   {
     "model": "mt0-small",
@@ -217,9 +217,9 @@
     "up_dep": "0.027",
     "massive_seq": "0.030",
     "germeval_opinions": "0.005",
-    "mlqa": "0.836",
-    "germanquad": "0.741",
-    "similarity_pawsx": "0.000"
+    "mlqa": "0.840",
+    "germanquad": "0.745",
+    "similarity_pawsx": "0.351"
   },
   {
     "model": "mt5-small",
@@ -254,9 +254,9 @@
     "up_dep": "0.027",
     "massive_seq": "0.030",
     "germeval_opinions": "0.005",
-    "mlqa": "0.725",
-    "germanquad": "0.675",
-    "similarity_pawsx": "0.000"
+    "mlqa": "0.713",
+    "germanquad": "0.628",
+    "similarity_pawsx": "0.114"
   },
   {
     "model": "german-gpt2",
@@ -291,9 +291,9 @@
     "up_dep": "0.845",
     "massive_seq": "0.856",
     "germeval_opinions": "0.292",
-    "mlqa": "0.851",
-    "germanquad": "0.778",
-    "similarity_pawsx": "0.427"
+    "mlqa": "0.828",
+    "germanquad": "0.740",
+    "similarity_pawsx": "0.394"
   },
   {
     "model": "bloomz-560m",
@@ -328,9 +328,9 @@
     "up_dep": "0.738",
     "massive_seq": "0.823",
     "germeval_opinions": "0.000",
-    "mlqa": "0.847",
-    "germanquad": "0.721",
-    "similarity_pawsx": "0.522"
+    "mlqa": "0.843",
+    "germanquad": "0.732",
+    "similarity_pawsx": "0.459"
   },
   {
     "model": "leo-hessian-7b",
@@ -365,8 +365,45 @@
     "up_dep": "0.866",
     "massive_seq": "0.914",
     "germeval_opinions": "0.000",
-    "mlqa": "0.897",
-    "germanquad": "0.831",
+    "mlqa": "0.905",
+    "germanquad": "0.830",
+    "similarity_pawsx": "0.000"
+  },
+  {
+    "model": "leo-mistral-hessian-7b",
+    "team": "Organizers",
+    "setting": "qlora",
+    "model_type": "decoder",
+    "model_arch": "bert",
+    "num_params": "6.611.537.920",
+    "toxic_comments": "0.697",
+    "offensive_lang": "0.565",
+    "db_aspect": "0.664",
+    "hotel_aspect": "0.704",
+    "polarity": "0.838",
+    "query_ad": "0.000",
+    "quest_ans": "0.000",
+    "pawsx": "0.000",
+    "webcage": "0.000",
+    "verbal_idioms": "0.000",
+    "engaging_comments": "0.693",
+    "factclaiming_comments": "0.741",
+    "news_class": "0.000",
+    "nli": "0.807",
+    "argument_mining": "0.834",
+    "massive_intents": "0.886",
+    "topic_relevance": "0.957",
+    "ner_news": "0.621",
+    "ner_europarl": "0.000",
+    "ner_biofid": "0.000",
+    "ner_wiki_news": "0.827",
+    "ner_legal": "0.000",
+    "up_pos": "0.899",
+    "up_dep": "0.850",
+    "massive_seq": "0.906",
+    "germeval_opinions": "0.000",
+    "mlqa": "0.892",
+    "germanquad": "0.828",
     "similarity_pawsx": "0.000"
   }
 ]
