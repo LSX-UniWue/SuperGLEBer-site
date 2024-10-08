@@ -1,7 +1,8 @@
 [
   {
-    "model": "gbert-base",
-    "team": "Organizers",
+    "model": "deepset/gbert-base",
+    "team": "LSX",
+    "team_url": "https://professor-x.de",
     "setting": "lora",
     "model_type": "encoder",
     "model_arch": "bert",
@@ -37,8 +38,9 @@
     "similarity_pawsx": "0.561"
   },
   {
-    "model": "gbert-large",
-    "team": "Organizers",
+    "model": "deepset/gbert-large",
+    "team": "LSX",
+    "team_url": "https://professor-x.de",
     "setting": "lora",
     "model_type": "encoder",
     "model_arch": "bert",
@@ -74,8 +76,9 @@
     "similarity_pawsx": "0.654"
   },
   {
-    "model": "gottbert",
-    "team": "Organizers",
+    "model": "uklfr/gottbert-base",
+    "team": "LSX",
+    "team_url": "https://professor-x.de",
     "setting": "lora",
     "model_type": "encoder",
     "model_arch": "bert",
@@ -112,7 +115,8 @@
   },
   {
     "model": "bert-base-german-cased",
-    "team": "Organizers",
+    "team": "LSX",
+    "team_url": "https://professor-x.de",
     "setting": "lora",
     "model_type": "encoder",
     "model_arch": "bert",
@@ -148,8 +152,9 @@
     "similarity_pawsx": "0.537"
   },
   {
-    "model": "mbart-large-50",
-    "team": "Organizers",
+    "model": "facebook/mbart-large-50",
+    "team": "LSX",
+    "team_url": "https://professor-x.de",
     "setting": "qlora",
     "model_type": "enc+dec",
     "model_arch": "bert",
@@ -185,8 +190,9 @@
     "similarity_pawsx": "0.358"
   },
   {
-    "model": "mt0-small",
-    "team": "Organizers",
+    "model": "bigscience/mt0-small",
+    "team": "LSX",
+    "team_url": "https://professor-x.de",
     "setting": "qlora",
     "model_type": "enc+dec",
     "model_arch": "bert",
@@ -222,8 +228,9 @@
     "similarity_pawsx": "0.351"
   },
   {
-    "model": "mt5-small",
-    "team": "Organizers",
+    "model": "google/mt5-small",
+    "team": "LSX",
+    "team_url": "https://professor-x.de",
     "setting": "qlora",
     "model_type": "enc+dec",
     "model_arch": "mt5",
@@ -259,8 +266,9 @@
     "similarity_pawsx": "0.114"
   },
   {
-    "model": "german-gpt2",
-    "team": "Organizers",
+    "model": "dbmdz/german-gpt2",
+    "team": "LSX",
+    "team_url": "https://professor-x.de",
     "setting": "qlora",
     "model_type": "decoder",
     "model_arch": "bert",
@@ -296,8 +304,9 @@
     "similarity_pawsx": "0.394"
   },
   {
-    "model": "bloomz-560m",
-    "team": "Organizers",
+    "model": "bigscience/bloomz-560m",
+    "team": "LSX",
+    "team_url": "https://professor-x.de",
     "setting": "qlora",
     "model_type": "decoder",
     "model_arch": "bert",
@@ -333,8 +342,9 @@
     "similarity_pawsx": "0.459"
   },
   {
-    "model": "leo-hessian-7b",
-    "team": "Organizers",
+    "model": "LeoLM/leo-hessianai-7b",
+    "team": "LSX",
+    "team_url": "https://professor-x.de",
     "setting": "qlora",
     "model_type": "decoder",
     "model_arch": "bert",
@@ -370,8 +380,9 @@
     "similarity_pawsx": "0.000"
   },
   {
-    "model": "leo-mistral-hessian-7b",
-    "team": "Organizers",
+    "model": "LeoLM/leo-mistral-hessianai-7b",
+    "team": "LSX",
+    "team_url": "https://professor-x.de",
     "setting": "qlora",
     "model_type": "decoder",
     "model_arch": "bert",
@@ -407,8 +418,9 @@
     "similarity_pawsx": "0.000"
   },
     {
-    "model": "Meta-Llama-3.1-8B",
-    "team": "Organizers",
+    "model": "meta-llama/Meta-Llama-3.1-8B",
+    "team": "LSX",
+    "team_url": "https://professor-x.de",
     "setting": "qlora",
     "model_type": "decoder",
     "model_arch": "bert",

@@ -7,6 +7,17 @@ import data from "/public/results_new.json";
 import { headerMenu, useTableFilter, formatter_avg } from "/public/utils";
 import { computeAverage, computeGlobalAvgClass, computeGlobalAvgSeq, computeLocalAvgClass, computeLocalAvgSeq } from "/public/averages";
 
+function render_team(cell, formatterParams) {
+  var value = cell.getValue();
+  var url = cell.getRow().getData().team_url;
+  return url ? `<a href="${url}" target="_blank" style="color: blue; text-decoration: underline;">🧑‍🔬 ${value}</a>` : value;
+}
+
+function render_model(cell, formatterParams) {
+  var value = cell.getValue();
+  return `<a href="https://hf.co/${value}" target="_blank" style="color: blue; text-decoration: underline;">🤖 ${value}</a>`;
+}
+
 export default function Leaderboard() {
   return (
     <div className="flex flex-col px-6 md:px-16 lg:px-128">
@@ -85,8 +96,13 @@ function OverallTable() {
     {
       title: "Model",
       columns: [
-        { title: "Team", field: "team", headerMenu: headerMenu },
-        { title: "Model", field: "model" },
+        {
+          title: "Team",
+          field: "team",
+          headerMenu: headerMenu,
+          formatter: render_team,
+        },
+        { title: "Model", field: "model", formatter: render_model },
         { title: "Type", field: "model_type" },
 
         { title: "Setting", field: "setting", hozAlign: "left" },
@@ -222,8 +238,13 @@ function ClassificationTable() {
     {
       title: "Model",
       columns: [
-        { title: "Team", field: "team", headerMenu: headerMenu },
-        { title: "Model", field: "model" },
+        {
+          title: "Team",
+          field: "team",
+          headerMenu: headerMenu,
+          formatter: render_team,
+        },
+        { title: "Model", field: "model", formatter: render_model },
         { title: "Type", field: "model_type" },
 
         { title: "Setting", field: "setting", hozAlign: "left" },
@@ -453,8 +474,13 @@ function SequenceTaggingTable() {
     {
       title: "Model",
       columns: [
-        { title: "Team", field: "team", headerMenu: headerMenu },
-        { title: "Model", field: "model" },
+        {
+          title: "Team",
+          field: "team",
+          headerMenu: headerMenu,
+          formatter: render_team,
+        },
+        { title: "Model", field: "model", formatter: render_model },
         { title: "Type", field: "model_type" },
 
         { title: "Setting", field: "setting", hozAlign: "left" },
@@ -606,8 +632,13 @@ function SimilarityTable() {
     {
       title: "Model",
       columns: [
-        { title: "Team", field: "team", headerMenu: headerMenu },
-        { title: "Model", field: "model" },
+        {
+          title: "Team",
+          field: "team",
+          headerMenu: headerMenu,
+          formatter: render_team,
+        },
+        { title: "Model", field: "model", formatter: render_model },
         { title: "Type", field: "model_type" },
 
         { title: "Setting", field: "setting", hozAlign: "left", cssClass: "vertical-line" },
@@ -707,9 +738,13 @@ function QATable() {
     {
       title: "Model",
       columns: [
-        { title: "Team", field: "team", headerMenu: headerMenu },
-        { title: "Model", field: "model" },
-
+        {
+          title: "Team",
+          field: "team",
+          headerMenu: headerMenu,
+          formatter: render_team,
+        },
+        { title: "Model", field: "model", formatter: render_model },
         { title: "Type", field: "model_type" },
 
         { title: "Setting", field: "setting", hozAlign: "left" },
