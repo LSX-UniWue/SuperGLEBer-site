@@ -1,8 +1,8 @@
 module.exports = {
   output: "export",
   images: {
-    loader: 'akamai',
-    path: '',
+    loader: "akamai",
+    path: "",
   },
   //assetPrefix: './',
 };
