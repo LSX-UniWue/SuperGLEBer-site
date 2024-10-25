@@ -417,7 +417,7 @@
     "germanquad": "0.828",
     "similarity_pawsx": "0.000"
   },
-    {
+  {
     "model": "meta-llama/Meta-Llama-3.1-8B",
     "team": "LSX",
     "team_url": "https://professor-x.de",
@@ -455,7 +455,7 @@
     "germanquad": "0.844",
     "similarity_pawsx": "0.000"
   },
-      {
+  {
     "model": "meta-llama/Llama-3.2-1B",
     "team": "LSX",
     "team_url": "https://professor-x.de",
@@ -493,7 +493,7 @@
     "germanquad": "0.796",
     "similarity_pawsx": "0.551"
   },
-        {
+  {
     "model": "utter-project/EuroLLM-1.7B",
     "team": "LSX",
     "team_url": "https://professor-x.de",
@@ -532,7 +532,7 @@
     "similarity_pawsx": "0.585"
   },
   {
-    "model": "LSX-UniWue/llammchen_120m (coming soon)",
+    "model": "LSX-UniWue/LLaMmlein_120m (coming soon)",
     "team": "LSX",
     "team_url": "https://professor-x.de",
     "setting": "qlora",
@@ -569,8 +569,8 @@
     "germanquad": "0.775",
     "similarity_pawsx": "0.489"
   },
-        {
-    "model": "LSX-UniWue/llammchen_1b (coming soon)",
+  {
+    "model": "LSX-UniWue/LLaMmlein_1b (coming soon)",
     "team": "LSX",
     "team_url": "https://professor-x.de",
     "setting": "qlora",
