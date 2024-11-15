@@ -163,10 +163,10 @@ function OverallTable() {
             {columns.map((columnGroup, groupIndex) =>
               columnGroup.columns
                 ? columnGroup.columns.map((column, columnIndex) => (
-                    <option key={groupIndex + "-" + columnIndex} value={column.field}>
-                      {column.title}
-                    </option>
-                  ))
+                  <option key={groupIndex + "-" + columnIndex} value={column.field}>
+                    {column.title}
+                  </option>
+                ))
                 : null
             )}
           </select>
@@ -218,6 +218,9 @@ function OverallTable() {
           paginationSize: 100,
           paginationSizeSelector: [5, 10, 50, 100],
           paginationSizeSelectorLayout: "dropdown",
+          initialSort: [
+            { column: "average", dir: "desc" },
+          ],
         }}
         className="custom-table-style"
       />
