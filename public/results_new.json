@@ -532,7 +532,7 @@
     "similarity_pawsx": "0.585"
   },
   {
-    "model": "LSX-UniWue/LLaMmlein_120m (coming soon)",
+    "model": "LSX-UniWue/LLaMmlein_120M",
     "team": "LSX",
     "team_url": "https://professor-x.de",
     "setting": "qlora",
@@ -570,7 +570,7 @@
     "similarity_pawsx": "0.489"
   },
   {
-    "model": "LSX-UniWue/LLaMmlein_1b (coming soon)",
+    "model": "LSX-UniWue/LLaMmlein_1B",
     "team": "LSX",
     "team_url": "https://professor-x.de",
     "setting": "qlora",
