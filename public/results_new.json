@@ -904,7 +904,7 @@
   },
 
     {
-    "model": "gerturax/gerturax-3p",
+    "model": "gerturax/gerturax-3",
     "team": "LSX",
     "team_url": "https://professor-x.de",
     "setting": "qlora",
