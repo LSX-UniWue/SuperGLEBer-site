@@ -938,5 +938,43 @@
     "mlqa": 0.862,
     "germanquad": 0.801,
     "similarity_pawsx": 0.603
+    },
+
+  {
+    "model": "LSX-UniWue/LLaMmlein_7B (Coming Soon)",
+    "team": "LSX",
+    "team_url": "https://professor-x.de",
+    "setting": "qlora",
+    "model_type": "decoder",
+    "toxic_comments": 0.690,
+    "offensive_lang": 0.574,
+    "db_aspect": 0.681,
+    "hotel_aspect": 0.699,
+    "polarity": 0.838,
+    "query_ad": 0.810,
+    "quest_ans": 0.760,
+    "pawsx": 0.893,
+    "webcage": 0.790,
+    "verbal_idioms": 0.956,
+    "engaging_comments": 0.706,
+    "factclaiming_comments": 0.740,
+    "news_class": 0.908,
+    "nli": 0.806,
+    "argument_mining": 0.837,
+    "massive_intents": 0.886,
+    "topic_relevance": 0.961,
+    "ner_news": 0.720,
+    "ner_europarl": 0.820,
+    "ner_biofid": 0.647,
+    "ner_wiki_news": 0.845,
+    "ner_legal": 0.948,
+    "up_pos": 0.924,
+    "up_dep": 0.886,
+    "massive_seq": 0.919,
+    "germeval_opinions": 0.502,
+    "mlqa": 0.900,
+    "germanquad": 0.801,
+    "similarity_pawsx": 0.524
     }
+
 ]
