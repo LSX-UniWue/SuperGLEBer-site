@@ -607,7 +607,7 @@
     "germanquad": "0.792",
     "similarity_pawsx": "0.526"
   },
-    {
+  {
     "model": "DiscoResearch/Llama3-German-8B",
     "team": "LSX",
     "team_url": "https://professor-x.de",
@@ -645,7 +645,7 @@
     "germanquad": "0.850",
     "similarity_pawsx": "0.569"
   },
-      {
+  {
     "model": "maxidl/DOSMo-7B-v0.2",
     "team": "LSX",
     "team_url": "https://professor-x.de",
@@ -865,7 +865,6 @@
     "germanquad": 0.812,
     "similarity_pawsx": 0.559
   },
-
   {
     "model": "benjamin/gerpt2",
     "team": "LSX",
@@ -902,13 +901,12 @@
     "germanquad": 0.772,
     "similarity_pawsx": 0.432
   },
-
-    {
+  {
     "model": "gerturax/gerturax-3",
     "team": "LSX",
     "team_url": "https://professor-x.de",
     "setting": "qlora",
-      "model_type": "encoder",
+    "model_type": "encoder",
     "toxic_comments": 0.675,
     "offensive_lang": 0.448,
     "db_aspect": 0.494,
@@ -938,8 +936,7 @@
     "mlqa": 0.862,
     "germanquad": 0.801,
     "similarity_pawsx": 0.603
-    },
-
+  },
   {
     "model": "LSX-UniWue/LLaMmlein_7B (Coming Soon)",
     "team": "LSX",
@@ -975,9 +972,9 @@
     "mlqa": 0.900,
     "germanquad": 0.801,
     "similarity_pawsx": 0.524
-    },
+  },
   {
-    "model": "LSX-UniWue/LLaMmlein2Vec (Coming Soon)",
+    "model": "LSX-UniWue/LLaMmlein_7B_2Vec (Coming Soon)",
     "team": "LSX",
     "team_url": "https://professor-x.de",
     "setting": "qlora",
@@ -1011,6 +1008,5 @@
     "mlqa": 0.907,
     "germanquad": 0.818,
     "similarity_pawsx": 0.673
-    }
-
+  }
 ]
