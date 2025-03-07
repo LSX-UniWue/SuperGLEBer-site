@@ -215,7 +215,7 @@ function OverallTable() {
         layout={"fitData"}
         options={{
           pagination: "local",
-          paginationSize: 100,
+          paginationSize: 10,
           paginationSizeSelector: [5, 10, 50, 100],
           paginationSizeSelectorLayout: "dropdown",
           initialSort: [
@@ -454,9 +454,12 @@ function ClassificationTable() {
         layout={"fitData"}
         options={{
           pagination: "local",
-          paginationSize: 100,
+          paginationSize: 10,
           paginationSizeSelector: [5, 10, 50, 100],
           paginationSizeSelectorLayout: "dropdown",
+          initialSort: [
+            { column: "averageClas", dir: "desc" },
+          ],
         }}
         className="custom-table-style"
       />
@@ -618,9 +621,12 @@ function SequenceTaggingTable() {
         layout={"fitData"}
         options={{
           pagination: "local",
-          paginationSize: 100,
+          paginationSize: 10,
           paginationSizeSelector: [5, 10, 50, 100],
           paginationSizeSelectorLayout: "dropdown",
+          initialSort: [
+            { column: "averageSeq", dir: "desc" },
+          ],
         }}
         className="custom-table-style"
       />
@@ -713,9 +719,12 @@ function SimilarityTable() {
         layout={"fitData"}
         options={{
           pagination: "local",
-          paginationSize: 100,
+          paginationSize: 10,
           paginationSizeSelector: [5, 10, 50, 100],
           paginationSizeSelectorLayout: "dropdown",
+          initialSort: [
+            { column: "similarity_pawsx", dir: "desc" },
+          ],
         }}
         className="custom-table-style"
       />
@@ -840,9 +849,12 @@ function QATable() {
         layout={"fitData"}
         options={{
           pagination: "local",
-          paginationSize: 100,
+          paginationSize: 10,
           paginationSizeSelector: [5, 10, 50, 100],
           paginationSizeSelectorLayout: "dropdown",
+          initialSort: [
+            { column: "averageQA", dir: "desc" },
+          ],
         }}
         className="custom-table-style"
       />
