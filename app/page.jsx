@@ -13,26 +13,26 @@ export default function Home() {
             good choice for most tasks, but also that the largest encoder model does not necessarily perform best for all tasks. We make our benchmark suite and leaderboard publicly available here and encourage the community to contribute new tasks and evaluate more models on it.
           </p>
           <div className="flex justify-between mt-60">
-            <button className="btn bg-blue-500 flex-1 mr-2 ">
-              <a href="./leaderboard_v1" className="text-white ">
+            <a href="./leaderboard_v1" className="flex-1 mr-2">
+              <button className="btn bg-blue-500 w-full text-white">
                 <span className="fa fa-trophy mr-2"></span>
                 Leaderboard
-              </a>
-            </button>
+              </button>
+            </a>
 
-            <button className="btn bg-blue-500 flex-1 mx-2 ">
-              <a href="https://aclanthology.org/2024.naacl-long.438/" target="_blank" className="text-white ">
+            <a href="https://aclanthology.org/2024.naacl-long.438/" target="_blank" className="flex-1 mx-2">
+              <button className="btn bg-blue-500 w-full text-white">
                 <span className="fa fa-file-text mr-2"></span>
                 Paper
-              </a>
-            </button>
+              </button>
+            </a>
 
-            <button className="btn bg-blue-500 flex-1 ml-2 ">
-              <a href="https://github.com/LSX-UniWue/SuperGLEBer" target="_blank" className="text-white ">
+            <a href="https://github.com/LSX-UniWue/SuperGLEBer" target="_blank" className="flex-1 ml-2">
+              <button className="btn bg-blue-500 w-full text-white">
                 <span className="fa fa-file-code mr-2"></span>
                 Code
-              </a>
-            </button>
+              </button>
+            </a>
           </div>
         </div>
       </div>
