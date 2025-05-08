@@ -994,8 +994,6 @@ function ModelParamsPlot() {
         </div>
       </div>
 
-      <p className="text-center text-sm mb-3">Markers represent model types: circles for encoders, triangles for decoders, and squares for encoder-decoder models.</p>
-
       <ResponsiveContainer width="100%" height={400}>
         <ScatterChart margin={{ top: 20, right: 20, bottom: 60, left: 20 }}>
           <CartesianGrid />
