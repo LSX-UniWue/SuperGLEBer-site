@@ -997,7 +997,7 @@ function ModelParamsPlot() {
       <p className="text-center text-sm mb-3">Markers represent model types: circles for encoders, triangles for decoders, and squares for encoder-decoder models.</p>
 
       <ResponsiveContainer width="100%" height={400}>
-        <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+        <ScatterChart margin={{ top: 20, right: 20, bottom: 60, left: 20 }}>
           <CartesianGrid />
           <XAxis
             type="number"
@@ -1005,7 +1005,7 @@ function ModelParamsPlot() {
             name="Parameters"
             domain={[xMin, xMax]}
             scale="log"
-            label={{ value: "Number of Parameters (log scale)", position: "bottom", offset: 0 }}
+            label={{ value: "Number of Parameters (log scale)", position: "bottom", offset: 15 }}
             tickFormatter={(value) => {
               if (value === 0) return "0";
               if (value >= 1e9) return `${(value / 1e9).toFixed(1)}B`;
@@ -1013,10 +1013,11 @@ function ModelParamsPlot() {
               if (value >= 1e3) return `${(value / 1e3).toFixed(1)}K`;
               return value;
             }}
+            ticks={[1e8, 3e8, 1e9, 3e9, 7e9]}
           />
-          <YAxis type="number" dataKey={(entry) => getYValue(entry)} name="Score" domain={[0, 1]} label={{ value: plotType.charAt(0).toUpperCase() + plotType.slice(1) + " Score", angle: -90, position: "insideLeft" }} />
+          <YAxis type="number" dataKey={(entry) => getYValue(entry)} name="Score" domain={[0, 1]} label={{ value: plotType.charAt(0).toUpperCase() + plotType.slice(1) + " Score", angle: -90, position: "insideLeft" }} ticks={[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]} />
           <Tooltip content={<CustomTooltip />} />
-          <Legend />
+          <Legend verticalAlign="top" height={36} />
           {["encoder", "decoder", "enc+dec"].map((type, index) => (
             <Scatter key={type} name={type === "enc+dec" ? "Encoder-Decoder" : type.charAt(0).toUpperCase() + type.slice(1)} data={validPlotData.filter((d) => d.type === type)} fill={getMarkerColor(type)} shape={type === "encoder" ? "circle" : type === "decoder" ? "triangle" : "square"} />
           ))}
