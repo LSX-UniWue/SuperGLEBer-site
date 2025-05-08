@@ -1,11 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
 import "/styles/globals.css";
 import { ReactTabulator } from "react-tabulator";
 import data from "/public/results_new.json";
 import { headerMenu, useTableFilter, formatter_avg } from "/public/utils";
 import { computeAverage, computeGlobalAvgClass, computeGlobalAvgSeq, computeLocalAvgClass, computeLocalAvgSeq } from "/public/averages";
+import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 function render_team(cell, formatterParams) {
   var value = cell.getValue();
@@ -22,6 +23,11 @@ export default function Leaderboard() {
   return (
     <div className="flex flex-col px-6 md:px-16 lg:px-128">
       <Intro />
+      <div className="ModelParamsPlot" style={{ width: "auto", height: 600, maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
+        <h2 className="text-3xl font-bold text-center py-3">Model Performance vs Parameter Count</h2>
+        <ModelParamsPlot />
+      </div>
+
       <div className="OverallTable" style={{ width: "auto", maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
         <OverallTable />
       </div>
@@ -163,10 +169,10 @@ function OverallTable() {
             {columns.map((columnGroup, groupIndex) =>
               columnGroup.columns
                 ? columnGroup.columns.map((column, columnIndex) => (
-                  <option key={groupIndex + "-" + columnIndex} value={column.field}>
-                    {column.title}
-                  </option>
-                ))
+                    <option key={groupIndex + "-" + columnIndex} value={column.field}>
+                      {column.title}
+                    </option>
+                  ))
                 : null
             )}
           </select>
@@ -218,9 +224,7 @@ function OverallTable() {
           paginationSize: 10,
           paginationSizeSelector: [5, 10, 50, 100],
           paginationSizeSelectorLayout: "dropdown",
-          initialSort: [
-            { column: "average", dir: "desc" },
-          ],
+          initialSort: [{ column: "average", dir: "desc" }],
         }}
         className="custom-table-style"
       />
@@ -457,9 +461,7 @@ function ClassificationTable() {
           paginationSize: 10,
           paginationSizeSelector: [5, 10, 50, 100],
           paginationSizeSelectorLayout: "dropdown",
-          initialSort: [
-            { column: "averageClas", dir: "desc" },
-          ],
+          initialSort: [{ column: "averageClas", dir: "desc" }],
         }}
         className="custom-table-style"
       />
@@ -624,9 +626,7 @@ function SequenceTaggingTable() {
           paginationSize: 10,
           paginationSizeSelector: [5, 10, 50, 100],
           paginationSizeSelectorLayout: "dropdown",
-          initialSort: [
-            { column: "averageSeq", dir: "desc" },
-          ],
+          initialSort: [{ column: "averageSeq", dir: "desc" }],
         }}
         className="custom-table-style"
       />
@@ -722,9 +722,7 @@ function SimilarityTable() {
           paginationSize: 10,
           paginationSizeSelector: [5, 10, 50, 100],
           paginationSizeSelectorLayout: "dropdown",
-          initialSort: [
-            { column: "similarity_pawsx", dir: "desc" },
-          ],
+          initialSort: [{ column: "similarity_pawsx", dir: "desc" }],
         }}
         className="custom-table-style"
       />
@@ -852,12 +850,178 @@ function QATable() {
           paginationSize: 10,
           paginationSizeSelector: [5, 10, 50, 100],
           paginationSizeSelectorLayout: "dropdown",
-          initialSort: [
-            { column: "averageQA", dir: "desc" },
-          ],
+          initialSort: [{ column: "averageQA", dir: "desc" }],
         }}
         className="custom-table-style"
       />
     </div>
+  );
+}
+
+function ModelParamsPlot() {
+  const [plotType, setPlotType] = useState("overall");
+
+  // Prepare the data for the plot
+  const prepareData = () => {
+    // Compute all averages
+    const class_avg = computeLocalAvgClass(data);
+    const keyRestClass = ["engaging_comments", "factclaiming_comments", "news_class", "nli", "argument_mining", "massive_intents", "topic_relevance"];
+    const class_avg_global = computeGlobalAvgClass(class_avg, keyRestClass);
+
+    const keyRestSeq = ["up_pos", "up_dep", "massive_seq", "germeval_opinions"];
+    const class_seq_avg = computeLocalAvgSeq(class_avg_global);
+    const class_seq_avg_global = computeGlobalAvgSeq(class_seq_avg, keyRestSeq);
+
+    const keyQA = ["mlqa", "germanquad"];
+
+    return class_seq_avg_global.map((row) => {
+      // Convert European number format (with dots as thousand separators) to integer
+      // Replace dots with empty string, then parse
+      const paramStr = row.num_params ? row.num_params.toString() : "0";
+      const params = parseInt(paramStr.replace(/\./g, ""));
+
+      const modelType = row.model_type;
+
+      const averageClas = parseFloat(row.averageClas);
+      const averageSeq = parseFloat(row.averageSeq);
+      const averageQA = computeAverage(row, keyQA);
+      const similarityScore = parseFloat(row.similarity_pawsx);
+
+      // Calculate overall average
+      const totalValues = [averageClas, averageSeq, averageQA, similarityScore].filter((v) => !isNaN(v));
+      const overallAverage = totalValues.length > 0 ? totalValues.reduce((total, score) => total + score, 0) / totalValues.length : 0;
+
+      return {
+        name: row.model,
+        team: row.team,
+        type: modelType,
+        setting: row.setting,
+        params: params,
+        overall: overallAverage,
+        classification: averageClas,
+        sequenceTagging: averageSeq,
+        qa: averageQA,
+        similarity: similarityScore,
+      };
+    });
+  };
+
+  const plotData = prepareData();
+
+  // Determine domain for X axis (parameters)
+  const validParams = plotData.filter((d) => !isNaN(d.params) && d.params > 0).map((d) => d.params);
+  const minParams = validParams.length > 0 ? Math.min(...validParams) : 1000000;
+  const maxParams = validParams.length > 0 ? Math.max(...validParams) : 1000000000;
+
+  // Ensure we have a reasonable domain even with data issues
+  const xMin = Math.max(minParams * 0.5, 100000); // At least 100K as min
+  const xMax = maxParams * 1.2; // Add 20% padding
+
+  // Color mapping for model types
+  const getMarkerColor = (type) => {
+    switch (type) {
+      case "encoder":
+        return "#8884d8";
+      case "decoder":
+        return "#82ca9d";
+      case "enc+dec":
+        return "#ffc658";
+      default:
+        return "#ff7300";
+    }
+  };
+
+  // Get which score to display based on selected plot type
+  const getYValue = (entry) => {
+    switch (plotType) {
+      case "classification":
+        return entry.classification;
+      case "sequenceTagging":
+        return entry.sequenceTagging;
+      case "qa":
+        return entry.qa;
+      case "similarity":
+        return entry.similarity;
+      default:
+        return entry.overall;
+    }
+  };
+
+  // Make sure we filter out any invalid data points
+  const validPlotData = plotData.filter((d) => !isNaN(d.params) && d.params > 0 && !isNaN(getYValue(d)));
+
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload;
+      return (
+        <div className="bg-white p-3 border border-gray-300 rounded-md shadow-lg">
+          <p className="font-bold">{data.name}</p>
+          <p>Team: {data.team}</p>
+          <p>Type: {data.type}</p>
+          <p>Parameters: {data.params.toLocaleString()}</p>
+          <p>Setting: {data.setting}</p>
+          <p className="font-semibold mt-2">Scores:</p>
+          <p>Overall: {data.overall.toFixed(3)}</p>
+          <p>Classification: {data.classification}</p>
+          <p>Sequence Tagging: {data.sequenceTagging}</p>
+          <p>QA: {data.qa.toFixed(3)}</p>
+          <p>Similarity: {data.similarity}</p>
+        </div>
+      );
+    }
+    return null;
+  };
+
+  return (
+    <>
+      <div className="flex justify-center mb-4">
+        <div className="inline-flex rounded-md shadow-sm" role="group">
+          <button onClick={() => setPlotType("overall")} className={`px-4 py-2 text-sm font-medium border ${plotType === "overall" ? "bg-blue-500 text-white" : "bg-white text-gray-700"} rounded-l-lg`}>
+            Overall
+          </button>
+          <button onClick={() => setPlotType("classification")} className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${plotType === "classification" ? "bg-blue-500 text-white" : "bg-white text-gray-700"}`}>
+            Classification
+          </button>
+          <button onClick={() => setPlotType("sequenceTagging")} className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${plotType === "sequenceTagging" ? "bg-blue-500 text-white" : "bg-white text-gray-700"}`}>
+            Sequence Tagging
+          </button>
+          <button onClick={() => setPlotType("qa")} className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${plotType === "qa" ? "bg-blue-500 text-white" : "bg-white text-gray-700"}`}>
+            QA
+          </button>
+          <button onClick={() => setPlotType("similarity")} className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${plotType === "similarity" ? "bg-blue-500 text-white" : "bg-white text-gray-700"} rounded-r-lg`}>
+            Similarity
+          </button>
+        </div>
+      </div>
+
+      <p className="text-center text-sm mb-3">Markers represent model types: circles for encoders, triangles for decoders, and squares for encoder-decoder models.</p>
+
+      <ResponsiveContainer width="100%" height={400}>
+        <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+          <CartesianGrid />
+          <XAxis
+            type="number"
+            dataKey="params"
+            name="Parameters"
+            domain={[xMin, xMax]}
+            scale="log"
+            label={{ value: "Number of Parameters (log scale)", position: "bottom", offset: 0 }}
+            tickFormatter={(value) => {
+              if (value === 0) return "0";
+              if (value >= 1e9) return `${(value / 1e9).toFixed(1)}B`;
+              if (value >= 1e6) return `${(value / 1e6).toFixed(1)}M`;
+              if (value >= 1e3) return `${(value / 1e3).toFixed(1)}K`;
+              return value;
+            }}
+          />
+          <YAxis type="number" dataKey={(entry) => getYValue(entry)} name="Score" domain={[0, 1]} label={{ value: plotType.charAt(0).toUpperCase() + plotType.slice(1) + " Score", angle: -90, position: "insideLeft" }} />
+          <Tooltip content={<CustomTooltip />} />
+          <Legend />
+          {["encoder", "decoder", "enc+dec"].map((type, index) => (
+            <Scatter key={type} name={type === "enc+dec" ? "Encoder-Decoder" : type.charAt(0).toUpperCase() + type.slice(1)} data={validPlotData.filter((d) => d.type === type)} fill={getMarkerColor(type)} shape={type === "encoder" ? "circle" : type === "decoder" ? "triangle" : "square"} />
+          ))}
+        </ScatterChart>
+      </ResponsiveContainer>
+    </>
   );
 }
