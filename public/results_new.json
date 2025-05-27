@@ -569,7 +569,6 @@
     "germanquad": "0.810",
     "similarity_pawsx": "0.595"
   },
-
   {
     "model": "LSX-UniWue/LLaMmlein_120M",
     "team": "LSX",
@@ -871,7 +870,6 @@
     "germanquad": 0.792,
     "similarity_pawsx": 0.583
   },
-
   {
     "model": "deepset/gelectra-base",
     "team": "LSX",
@@ -909,7 +907,6 @@
     "germanquad": 0.787,
     "similarity_pawsx": 0.440
   },
-
   {
     "model": "deepset/gelectra-large",
     "team": "LSX",
@@ -1132,7 +1129,6 @@
     "germanquad": 0.802,
     "similarity_pawsx": 0.615
   },
-
   {
     "model": "LSX-UniWue/LLaMmlein_7B",
     "team": "LSX",
