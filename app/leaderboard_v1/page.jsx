@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
 import "/styles/globals.css";
 import { ReactTabulator } from "react-tabulator";
@@ -20,10 +20,35 @@ function render_model(cell, formatterParams) {
 }
 
 export default function Leaderboard() {
+  useEffect(() => {
+    const handleScrollToHash = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        // Wait for the plot to render before scrolling
+        setTimeout(() => {
+          const element = document.querySelector(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 1000); // 1 second delay to allow plot to load
+      }
+    };
+
+    // Scroll on initial load
+    handleScrollToHash();
+
+    // Also handle hash changes
+    window.addEventListener("hashchange", handleScrollToHash);
+
+    return () => {
+      window.removeEventListener("hashchange", handleScrollToHash);
+    };
+  }, []);
+
   return (
     <div className="flex flex-col px-6 md:px-16 lg:px-128">
       <Intro />
-      <div className="ModelParamsPlot" style={{ width: "auto", height: 600, maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
+      <div id="modelparamsplot" className="ModelParamsPlot" style={{ width: "auto", height: 600, maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
         <h2 className="text-3xl font-bold text-center py-3">Model Performance vs Parameter Count</h2>
         <ModelParamsPlot />
       </div>
@@ -32,17 +57,17 @@ export default function Leaderboard() {
         <OverallTable />
       </div>
 
-      <div className="ClassificationTable" style={{ width: "auto", maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
+      <div id="classification" className="ClassificationTable" style={{ width: "auto", maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
         <ClassificationTable />
       </div>
-      <div className="SequenceTaggingTable" style={{ width: "auto", maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
+      <div id="sequence-tagging" className="SequenceTaggingTable" style={{ width: "auto", maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
         <SequenceTaggingTable />
       </div>
 
-      <div className="SimilarityTable" style={{ width: "auto", maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
+      <div id="similarity" className="SimilarityTable" style={{ width: "auto", maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
         <SimilarityTable />
       </div>
-      <div className="QATable" style={{ width: "auto", maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
+      <div id="qa" className="QATable" style={{ width: "auto", maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
         <QATable />
       </div>
     </div>
