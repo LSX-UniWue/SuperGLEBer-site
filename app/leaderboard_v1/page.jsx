@@ -28,7 +28,7 @@ export default function Leaderboard() {
         <ModelParamsPlot />
       </div>
 
-      <div className="OverallTable" style={{ width: "auto", maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
+      <div id="overall" className="OverallTable" style={{ width: "auto", maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
         <OverallTable />
       </div>
 
