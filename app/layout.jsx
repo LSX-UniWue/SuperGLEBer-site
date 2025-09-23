@@ -61,7 +61,7 @@ export function NavBar() {
                 </ul>
               </li>
               <li style={{ fontSize: FONT_HEAD }}>
-                <a href="./leaderboard">Leaderboard</a>
+                <a href="./leaderboard_v1">Leaderboard</a>
                 <ul className="p-2">
                   <li>
                     <a href="./leaderboard_v1">Leaderboard v1</a>
