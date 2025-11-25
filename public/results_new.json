@@ -1167,11 +1167,12 @@
     "similarity_pawsx": 0.524
   },
   {
-    "model": "LSX-UniWue/LLaMmlein_7B_2Vec (Coming Soon)",
+    "model": "LSX-UniWue/LLaMmlein2Vec_7B",
     "team": "LSX",
     "team_url": "https://professor-x.de",
     "setting": "qlora",
     "model_type": "encoder",
+    "num_params": "6.611.800.064",
     "toxic_comments": 0.694,
     "offensive_lang": 0.558,
     "db_aspect": 0.673,
