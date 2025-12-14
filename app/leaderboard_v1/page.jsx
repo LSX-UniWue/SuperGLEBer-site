@@ -46,7 +46,7 @@ export default function Leaderboard() {
   }, []);
 
   return (
-    <div className="flex flex-col px-6 md:px-16 lg:px-128">
+    <div className="flex flex-col px-6 md:px-16 lg:px-24">
       <Intro />
       <div id="modelparamsplot" className="ModelParamsPlot" style={{ width: "auto", height: 600, maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
         <h2 className="text-3xl font-bold text-center py-3">Model Performance vs Parameter Count</h2>
@@ -77,12 +77,12 @@ export default function Leaderboard() {
 function Intro() {
   return (
     <article className="py-10">
-      <h1 className="text-5xl font-bold text-center py-5">Leaderboard V1</h1>
+      <h1 className="text-5xl font-bold text-center py-5">Leaderboard v1</h1>
       <p className="text-center py-7">Below you can find the current leaderboard for the different tasks.</p>
       <p className="text-center">
         Compared to the previous{" "}
         <a href="leaderboard_v09" style={{ color: "cornflowerblue" }}>
-          V0.9 version
+          v0.9 version
         </a>{" "}
         used in our paper, we updated several packages to more recent versions leading to different results. All tasks and settings remain the same.
       </p>

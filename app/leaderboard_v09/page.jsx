@@ -10,7 +10,7 @@ import { bgBlue } from "next/dist/lib/picocolors";
 
 export default function Leaderboard() {
   return (
-    <div className="flex flex-col px-6 md:px-16 lg:px-128">
+    <div className="flex flex-col px-6 md:px-16 lg:px-24">
       <Intro />
       <div className="OverallTable" style={{ width: "auto", maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
         <OverallTable />
@@ -36,7 +36,7 @@ export default function Leaderboard() {
 function Intro() {
   return (
     <article className="py-10">
-      <h1 className="text-5xl font-bold text-center py-5">Leaderboard V0.9</h1>
+      <h1 className="text-5xl font-bold text-center py-5">Leaderboard v0.9</h1>
       <p className="text-center py-7">Below you can find the paper results for the different tasks.</p>
       <p className="text-center">Note that results for tasks marked with an '*' (Hotel Aspect and WebCAGe) have been updated as rerunning, resulted in different outcomes.</p>
       <p className="text-center">
