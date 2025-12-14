@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Home() {
   return (
-    <div className="hero min-h-screen bg-base-100">
+    <div className="hero min-h-full bg-base-100">
       <div className="hero-content text-center">
         <div className="w-3/5 space-y-4">
           <h1 className="text-5xl font-bold text-blue-500 relative z-30">SuperGLEBer</h1>
@@ -12,7 +12,7 @@ export default function Home() {
             ranging over different types like document classification, sequence tagging, document embedding, and question answering. We evaluate 10 different German-pretrained models and thereby chart the landscape of German LLMs. In our comprehensive evaluation, we find that encoder models are a
             good choice for most tasks, but also that the largest encoder model does not necessarily perform best for all tasks. We make our benchmark suite and leaderboard publicly available here and encourage the community to contribute new tasks and evaluate more models on it.
           </p>
-          <div className="flex justify-between mt-60">
+          <div className="flex justify-between mt-8">
             <a href="./leaderboard_v1" className="flex-1 mr-2">
               <button className="btn bg-blue-500 w-full text-white">
                 <span className="fa fa-trophy mr-2"></span>
