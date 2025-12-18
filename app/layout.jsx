@@ -1,6 +1,32 @@
 import "../styles/globals.css";
 import TabulatorDarkMode from "./TabulatorDarkMode";
 
+export const metadata = {
+  title: 'SuperGLEBer',
+  description: 'German Language Understanding Evaluation Benchmark',
+  openGraph: {
+    title: 'SuperGLEBer',
+    description: 'German Language Understanding Evaluation Benchmark',
+    url: 'https://supergleber.professor-x.de',
+    siteName: 'SuperGLEBer',
+    images: [
+      {
+        url: 'https://supergleber.professor-x.de/bernd.png',
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SuperGLEBer',
+    description: 'German Language Understanding Evaluation Benchmark',
+    images: ['https://supergleber.professor-x.de/bernd.png'],
+  },
+};
+
 let FONT_HEAD = "20px";
 
 export default function RootLayout({ children }) {
@@ -9,7 +35,6 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
         <link rel="icon" href="/SuperGLEBer-site/bernd.png" />
-        <title>SuperGLEBer</title>
       </head>
 
       <body>
