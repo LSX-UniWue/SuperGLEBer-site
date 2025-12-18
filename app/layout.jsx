@@ -11,7 +11,7 @@ export const metadata = {
     siteName: 'SuperGLEBer',
     images: [
       {
-        url: 'https://supergleber.professor-x.de/bernd.png',
+        url: 'https://lsx-uniwue.github.io/SuperGLEBer-site/bernd.png',
         width: 800,
         height: 600,
       },
@@ -23,7 +23,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'SuperGLEBer',
     description: 'German Language Understanding Evaluation Benchmark',
-    images: ['https://supergleber.professor-x.de/bernd.png'],
+    images: ['https://lsx-uniwue.github.io/SuperGLEBer-site/bernd.png'],
   },
 };
 
