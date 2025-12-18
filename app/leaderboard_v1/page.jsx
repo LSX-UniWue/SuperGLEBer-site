@@ -46,10 +46,10 @@ export default function Leaderboard() {
   }, []);
 
   return (
-    <div className="flex flex-col px-6 md:px-16 lg:px-24">
+    <div className="flex flex-col px-2 sm:px-6 md:px-16 lg:px-24">
       <Intro />
-      <div id="modelparamsplot" className="ModelParamsPlot" style={{ width: "auto", height: 600, maxWidth: "100%", margin: "0 auto", overflowX: "auto" }}>
-        <h2 className="text-3xl font-bold text-center py-3">Model Performance vs Parameter Count</h2>
+      <div id="modelparamsplot" className="ModelParamsPlot" style={{ width: "auto", height: 600, maxWidth: "100%", margin: "0 auto" }}>
+        <h2 className="text-xl sm:text-3xl font-bold text-center py-3">Model Performance vs Parameter Count</h2>
         <ModelParamsPlot />
       </div>
 
@@ -76,17 +76,17 @@ export default function Leaderboard() {
 
 function Intro() {
   return (
-    <article className="py-10">
-      <h1 className="text-5xl font-bold text-center py-5">Leaderboard v1</h1>
-      <p className="text-center py-7">Below you can find the current leaderboard for the different tasks.</p>
-      <p className="text-center">
+    <article className="py-6 sm:py-10 px-2">
+      <h1 className="text-3xl sm:text-5xl font-bold text-center py-3 sm:py-5">Leaderboard v1</h1>
+      <p className="text-center py-4 sm:py-7 text-sm sm:text-base">Below you can find the current leaderboard for the different tasks.</p>
+      <p className="text-center text-sm sm:text-base">
         Compared to the previous{" "}
         <a href="leaderboard_v09" style={{ color: "cornflowerblue" }}>
           v0.9 version
         </a>{" "}
         used in our paper, we updated several packages to more recent versions leading to different results. All tasks and settings remain the same.
       </p>
-      <p className="text-center">The leaderboard will be updated as new results come in.</p>
+      <p className="text-center text-sm sm:text-base">The leaderboard will be updated as new results come in.</p>
     </article>
   );
 }
@@ -186,58 +186,62 @@ function OverallTable() {
 
   return (
     <div className="overflow-x-auto py-5">
-      <h1 className="text-3xl font-bold text-center py-3">Overall Results</h1>
-      <div className="py-5 flex items-center justify-center space-x-3">
-        <div className="relative">
-          <select value={filterField} onChange={(e) => setFilterField(e.target.value)} className="appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
-            <option value="">Select Field</option>
-            {columns.map((columnGroup, groupIndex) =>
-              columnGroup.columns
-                ? columnGroup.columns.map((column, columnIndex) => (
-                    <option key={groupIndex + "-" + columnIndex} value={column.field}>
-                      {column.title}
-                    </option>
-                  ))
-                : null
-            )}
-          </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
-            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
-            </svg>
+      <h1 className="text-xl sm:text-3xl font-bold text-center py-3">Overall Results</h1>
+      <div className="py-3 sm:py-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2 sm:gap-3 px-2 sm:px-0">
+        <div className="flex gap-2">
+          <div className="relative flex-1">
+            <select value={filterField} onChange={(e) => setFilterField(e.target.value)} className="w-full appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm">
+              <option value="">Select Field</option>
+              {columns.map((columnGroup, groupIndex) =>
+                columnGroup.columns
+                  ? columnGroup.columns.map((column, columnIndex) => (
+                      <option key={groupIndex + "-" + columnIndex} value={column.field}>
+                        {column.title}
+                      </option>
+                    ))
+                  : null
+              )}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
+              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
+              </svg>
+            </div>
+          </div>
+
+          <div className="relative w-16">
+            <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="w-full appearance-none border border-gray-300 rounded-md pl-3 pr-6 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm">
+              <option value="=">=</option>
+              <option value="<">&lt;</option>
+              <option value=">">&gt;</option>
+              <option value="!=">!=</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1">
+              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
+              </svg>
+            </div>
           </div>
         </div>
 
-        <div className="relative">
-          <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
-            <option value="=">=</option>
-            <option value="<">&lt;</option>
-            <option value=">">&gt;</option>
-            <option value="!=">!=</option>
-          </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
-            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
-            </svg>
-          </div>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Value to filter"
+            value={filterValue}
+            onChange={(e) => setFilterValue(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                handleFilterChange();
+              }
+            }}
+            className="flex-1 sm:flex-none border border-gray-300 rounded-md pl-3 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+          />
+
+          <button onClick={clearFilter} className="border border-gray-300 bg-gray-200 px-4 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:bg-gray-400 text-sm whitespace-nowrap">
+            Clear
+          </button>
         </div>
-
-        <input
-          type="text"
-          placeholder="Value to filter"
-          value={filterValue}
-          onChange={(e) => setFilterValue(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              handleFilterChange();
-            }
-          }}
-          className="border border-gray-300 rounded-md pl-3 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        />
-
-        <button onClick={clearFilter} className=" border border-gray-300 bg-gray-200 0 px-4 py-1 rounded-md hover:bg-gray-300 focus:outline-none focus:bg-gray-400">
-          Clear Filter
-        </button>
       </div>
 
       <ReactTabulator
@@ -424,57 +428,60 @@ function ClassificationTable() {
   ];
   return (
     <div className="overflow-x-auto py-5">
-      <h1 className="text-3xl font-bold text-center py-3">Classification</h1>
-      <div className="py-5 flex items-center justify-center space-x-3">
-        <div className="relative">
-          <select value={filterField} onChange={(e) => setFilterField(e.target.value)} className="appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
-            <option value="">Select Field</option>
-            {columns.map((columnGroup) =>
-              columnGroup.columns.map((column, columnIndex) => (
-                <option key={columnIndex} value={column.field}>
-                  {column.title}
-                </option>
-              ))
-            )}
-          </select>
+      <h1 className="text-xl sm:text-3xl font-bold text-center py-3">Classification</h1>
+      <div className="py-3 sm:py-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2 sm:gap-3 px-2 sm:px-0">
+        <div className="flex gap-2">
+          <div className="relative flex-1">
+            <select value={filterField} onChange={(e) => setFilterField(e.target.value)} className="w-full appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm">
+              <option value="">Select Field</option>
+              {columns.map((columnGroup) =>
+                columnGroup.columns.map((column, columnIndex) => (
+                  <option key={columnIndex} value={column.field}>
+                    {column.title}
+                  </option>
+                ))
+              )}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
+              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
+              </svg>
+            </div>
+          </div>
 
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 ">
-            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
-            </svg>
+          <div className="relative w-16">
+            <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="w-full appearance-none border border-gray-300 rounded-md pl-3 pr-6 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm">
+              <option value="=">=</option>
+              <option value="<">&lt;</option>
+              <option value=">">&gt;</option>
+              <option value="!=">!=</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1">
+              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
+              </svg>
+            </div>
           </div>
         </div>
 
-        <div className="relative">
-          <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
-            <option value="=">=</option>
-            <option value="<">&lt;</option>
-            <option value=">">&gt;</option>
-            <option value="!=">!=</option>
-          </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
-            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
-            </svg>
-          </div>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Value to filter"
+            value={filterValue}
+            onChange={(e) => setFilterValue(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                handleFilterChange();
+              }
+            }}
+            className="flex-1 sm:flex-none border border-gray-300 rounded-md pl-3 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+          />
+
+          <button onClick={clearFilter} className="border border-gray-300 bg-gray-200 px-4 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:bg-gray-400 text-sm whitespace-nowrap">
+            Clear
+          </button>
         </div>
-
-        <input
-          type="text"
-          placeholder="Value to filter"
-          value={filterValue}
-          onChange={(e) => setFilterValue(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              handleFilterChange();
-            }
-          }}
-          className="border border-gray-300 rounded-md pl-3 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        />
-
-        <button onClick={clearFilter} className=" border border-gray-300 bg-gray-200 0 px-4 py-1 rounded-md hover:bg-gray-300 focus:outline-none focus:bg-gray-400">
-          Clear Filter
-        </button>
       </div>
 
       <ReactTabulator
@@ -589,57 +596,60 @@ function SequenceTaggingTable() {
 
   return (
     <div className="overflow-x-auto py-5">
-      <h1 className="text-3xl font-bold text-center py-3">Sequence Tagging</h1>
-      <div className="py-5 flex items-center justify-center space-x-3">
-        <div className="relative">
-          <select value={filterField} onChange={(e) => setFilterField(e.target.value)} className="appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
-            <option value="">Select Field</option>
-            {columns.map((columnGroup) =>
-              columnGroup.columns.map((column, columnIndex) => (
-                <option key={columnIndex} value={column.field}>
-                  {column.title}
-                </option>
-              ))
-            )}
-          </select>
+      <h1 className="text-xl sm:text-3xl font-bold text-center py-3">Sequence Tagging</h1>
+      <div className="py-3 sm:py-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2 sm:gap-3 px-2 sm:px-0">
+        <div className="flex gap-2">
+          <div className="relative flex-1">
+            <select value={filterField} onChange={(e) => setFilterField(e.target.value)} className="w-full appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm">
+              <option value="">Select Field</option>
+              {columns.map((columnGroup) =>
+                columnGroup.columns.map((column, columnIndex) => (
+                  <option key={columnIndex} value={column.field}>
+                    {column.title}
+                  </option>
+                ))
+              )}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
+              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
+              </svg>
+            </div>
+          </div>
 
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 ">
-            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
-            </svg>
+          <div className="relative w-16">
+            <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="w-full appearance-none border border-gray-300 rounded-md pl-3 pr-6 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm">
+              <option value="=">=</option>
+              <option value="<">&lt;</option>
+              <option value=">">&gt;</option>
+              <option value="!=">!=</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1">
+              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
+              </svg>
+            </div>
           </div>
         </div>
 
-        <div className="relative">
-          <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
-            <option value="=">=</option>
-            <option value="<">&lt;</option>
-            <option value=">">&gt;</option>
-            <option value="!=">!=</option>
-          </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
-            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
-            </svg>
-          </div>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Value to filter"
+            value={filterValue}
+            onChange={(e) => setFilterValue(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                handleFilterChange();
+              }
+            }}
+            className="flex-1 sm:flex-none border border-gray-300 rounded-md pl-3 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+          />
+
+          <button onClick={clearFilter} className="border border-gray-300 bg-gray-200 px-4 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:bg-gray-400 text-sm whitespace-nowrap">
+            Clear
+          </button>
         </div>
-
-        <input
-          type="text"
-          placeholder="Value to filter"
-          value={filterValue}
-          onChange={(e) => setFilterValue(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              handleFilterChange();
-            }
-          }}
-          className="border border-gray-300 rounded-md pl-3 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        />
-
-        <button onClick={clearFilter} className=" border border-gray-300 bg-gray-200 0 px-4 py-1 rounded-md hover:bg-gray-300 focus:outline-none focus:bg-gray-400">
-          Clear Filter
-        </button>
       </div>
 
       <ReactTabulator
@@ -685,57 +695,60 @@ function SimilarityTable() {
   ];
   return (
     <div className="overflow-x-auto py-5">
-      <h1 className="text-3xl font-bold text-center py-3">Sentence Similarity</h1>
-      <div className="py-5 flex items-center justify-center space-x-3">
-        <div className="relative">
-          <select value={filterField} onChange={(e) => setFilterField(e.target.value)} className="appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
-            <option value="">Select Field</option>
-            {columns.map((columnGroup) =>
-              columnGroup.columns.map((column, columnIndex) => (
-                <option key={columnIndex} value={column.field}>
-                  {column.title}
-                </option>
-              ))
-            )}
-          </select>
+      <h1 className="text-xl sm:text-3xl font-bold text-center py-3">Sentence Similarity</h1>
+      <div className="py-3 sm:py-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2 sm:gap-3 px-2 sm:px-0">
+        <div className="flex gap-2">
+          <div className="relative flex-1">
+            <select value={filterField} onChange={(e) => setFilterField(e.target.value)} className="w-full appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm">
+              <option value="">Select Field</option>
+              {columns.map((columnGroup) =>
+                columnGroup.columns.map((column, columnIndex) => (
+                  <option key={columnIndex} value={column.field}>
+                    {column.title}
+                  </option>
+                ))
+              )}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
+              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
+              </svg>
+            </div>
+          </div>
 
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 ">
-            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
-            </svg>
+          <div className="relative w-16">
+            <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="w-full appearance-none border border-gray-300 rounded-md pl-3 pr-6 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm">
+              <option value="=">=</option>
+              <option value="<">&lt;</option>
+              <option value=">">&gt;</option>
+              <option value="!=">!=</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1">
+              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
+              </svg>
+            </div>
           </div>
         </div>
 
-        <div className="relative">
-          <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
-            <option value="=">=</option>
-            <option value="<">&lt;</option>
-            <option value=">">&gt;</option>
-            <option value="!=">!=</option>
-          </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
-            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
-            </svg>
-          </div>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Value to filter"
+            value={filterValue}
+            onChange={(e) => setFilterValue(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                handleFilterChange();
+              }
+            }}
+            className="flex-1 sm:flex-none border border-gray-300 rounded-md pl-3 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+          />
+
+          <button onClick={clearFilter} className="border border-gray-300 bg-gray-200 px-4 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:bg-gray-400 text-sm whitespace-nowrap">
+            Clear
+          </button>
         </div>
-
-        <input
-          type="text"
-          placeholder="Value to filter"
-          value={filterValue}
-          onChange={(e) => setFilterValue(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              handleFilterChange();
-            }
-          }}
-          className="border border-gray-300 rounded-md pl-3 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        />
-
-        <button onClick={clearFilter} className=" border border-gray-300 bg-gray-200 0 px-4 py-1 rounded-md hover:bg-gray-300 focus:outline-none focus:bg-gray-400">
-          Clear Filter
-        </button>
       </div>
 
       <ReactTabulator
@@ -813,57 +826,60 @@ function QATable() {
 
   return (
     <div className="overflow-x-auto py-5">
-      <h1 className="text-3xl font-bold text-center py-3">Question Answering</h1>
-      <div className="py-5 flex items-center justify-center space-x-3">
-        <div className="relative">
-          <select value={filterField} onChange={(e) => setFilterField(e.target.value)} className="appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
-            <option value="">Select Field</option>
-            {columns.map((columnGroup) =>
-              columnGroup.columns.map((column, columnIndex) => (
-                <option key={columnIndex} value={column.field}>
-                  {column.title}
-                </option>
-              ))
-            )}
-          </select>
+      <h1 className="text-xl sm:text-3xl font-bold text-center py-3">Question Answering</h1>
+      <div className="py-3 sm:py-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2 sm:gap-3 px-2 sm:px-0">
+        <div className="flex gap-2">
+          <div className="relative flex-1">
+            <select value={filterField} onChange={(e) => setFilterField(e.target.value)} className="w-full appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm">
+              <option value="">Select Field</option>
+              {columns.map((columnGroup) =>
+                columnGroup.columns.map((column, columnIndex) => (
+                  <option key={columnIndex} value={column.field}>
+                    {column.title}
+                  </option>
+                ))
+              )}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
+              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
+              </svg>
+            </div>
+          </div>
 
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 ">
-            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
-            </svg>
+          <div className="relative w-16">
+            <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="w-full appearance-none border border-gray-300 rounded-md pl-3 pr-6 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-sm">
+              <option value="=">=</option>
+              <option value="<">&lt;</option>
+              <option value=">">&gt;</option>
+              <option value="!=">!=</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1">
+              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
+              </svg>
+            </div>
           </div>
         </div>
 
-        <div className="relative">
-          <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="appearance-none border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
-            <option value="=">=</option>
-            <option value="<">&lt;</option>
-            <option value=">">&gt;</option>
-            <option value="!=">!=</option>
-          </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
-            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
-            </svg>
-          </div>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Value to filter"
+            value={filterValue}
+            onChange={(e) => setFilterValue(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                handleFilterChange();
+              }
+            }}
+            className="flex-1 sm:flex-none border border-gray-300 rounded-md pl-3 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+          />
+
+          <button onClick={clearFilter} className="border border-gray-300 bg-gray-200 px-4 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:bg-gray-400 text-sm whitespace-nowrap">
+            Clear
+          </button>
         </div>
-
-        <input
-          type="text"
-          placeholder="Value to filter"
-          value={filterValue}
-          onChange={(e) => setFilterValue(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              handleFilterChange();
-            }
-          }}
-          className="border border-gray-300 rounded-md pl-3 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        />
-
-        <button onClick={clearFilter} className=" border border-gray-300 bg-gray-200 0 px-4 py-1 rounded-md hover:bg-gray-300 focus:outline-none focus:bg-gray-400">
-          Clear Filter
-        </button>
       </div>
 
       <ReactTabulator
@@ -999,21 +1015,21 @@ function ModelParamsPlot() {
 
   return (
     <>
-      <div className="flex justify-center mb-4">
-        <div className="inline-flex rounded-md shadow-sm" role="group">
-          <button onClick={() => setPlotType("overall")} className={`px-4 py-2 text-sm font-medium border ${plotType === "overall" ? "bg-blue-500 text-white" : "bg-white text-gray-700"} rounded-l-lg`}>
+      <div className="flex justify-center mb-4 px-2">
+        <div className="flex flex-wrap justify-center gap-1 sm:gap-0 sm:inline-flex sm:rounded-md sm:shadow-sm" role="group">
+          <button onClick={() => setPlotType("overall")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "overall" ? "bg-blue-500 text-white" : "bg-white text-gray-700"} rounded-lg sm:rounded-none sm:rounded-l-lg`}>
             Overall
           </button>
-          <button onClick={() => setPlotType("classification")} className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${plotType === "classification" ? "bg-blue-500 text-white" : "bg-white text-gray-700"}`}>
+          <button onClick={() => setPlotType("classification")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "classification" ? "bg-blue-500 text-white" : "bg-white text-gray-700"} rounded-lg sm:rounded-none sm:border-l-0`}>
             Classification
           </button>
-          <button onClick={() => setPlotType("sequenceTagging")} className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${plotType === "sequenceTagging" ? "bg-blue-500 text-white" : "bg-white text-gray-700"}`}>
-            Sequence Tagging
+          <button onClick={() => setPlotType("sequenceTagging")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "sequenceTagging" ? "bg-blue-500 text-white" : "bg-white text-gray-700"} rounded-lg sm:rounded-none sm:border-l-0`}>
+            Seq. Tagging
           </button>
-          <button onClick={() => setPlotType("qa")} className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${plotType === "qa" ? "bg-blue-500 text-white" : "bg-white text-gray-700"}`}>
+          <button onClick={() => setPlotType("qa")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "qa" ? "bg-blue-500 text-white" : "bg-white text-gray-700"} rounded-lg sm:rounded-none sm:border-l-0`}>
             QA
           </button>
-          <button onClick={() => setPlotType("similarity")} className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${plotType === "similarity" ? "bg-blue-500 text-white" : "bg-white text-gray-700"} rounded-r-lg`}>
+          <button onClick={() => setPlotType("similarity")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "similarity" ? "bg-blue-500 text-white" : "bg-white text-gray-700"} rounded-lg sm:rounded-none sm:rounded-r-lg sm:border-l-0`}>
             Similarity
           </button>
         </div>
