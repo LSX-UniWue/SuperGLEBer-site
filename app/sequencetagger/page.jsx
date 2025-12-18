@@ -1,8 +1,11 @@
 "use client";
 import React from "react";
-import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
 import "/styles/globals.css";
-import { ReactTabulator } from "react-tabulator";
+import dynamic from "next/dynamic";
+
+const ReactTabulator = dynamic(() => import("react-tabulator").then((mod) => mod.ReactTabulator), {
+  ssr: false,
+});
 import { headerMenu, useTableFilter } from "/public/utils";
 
 export default function Leaderboard() {

@@ -1,8 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
 import "/styles/globals.css";
-import { ReactTabulator } from "react-tabulator";
+import dynamic from "next/dynamic";
+
+const ReactTabulator = dynamic(() => import("react-tabulator").then((mod) => mod.ReactTabulator), {
+  ssr: false,
+  loading: () => <div>Loading table...</div>,
+});
 import data from "/public/results_new.json";
 import { headerMenu, useTableFilter, formatter_avg } from "/public/utils";
 import { computeAverage, computeGlobalAvgClass, computeGlobalAvgSeq, computeLocalAvgClass, computeLocalAvgSeq } from "/public/averages";
@@ -11,12 +15,12 @@ import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Leg
 function render_team(cell, formatterParams) {
   var value = cell.getValue();
   var url = cell.getRow().getData().team_url;
-  return url ? `<a href="${url}" target="_blank" style="color: blue; text-decoration: underline;">🧑‍🔬 ${value}</a>` : value;
+  return url ? `<a href="${url}" target="_blank" style="color: #3b82f6; text-decoration: underline;">🧑‍🔬 ${value}</a>` : value;
 }
 
 function render_model(cell, formatterParams) {
   var value = cell.getValue();
-  return `<a href="https://hf.co/${value}" target="_blank" style="color: blue; text-decoration: underline;">🤖 ${value}</a>`;
+  return `<a href="https://hf.co/${value}" target="_blank" style="color: #3b82f6; text-decoration: underline;">🤖 ${value}</a>`;
 }
 
 export default function Leaderboard() {
@@ -995,7 +999,7 @@ function ModelParamsPlot() {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
-        <div className="bg-white p-3 border border-gray-300 rounded-md shadow-lg">
+        <div className="bg-base-100 text-base-content p-3 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg">
           <p className="font-bold">{data.name}</p>
           <p>Team: {data.team}</p>
           <p>Type: {data.type}</p>
@@ -1017,19 +1021,19 @@ function ModelParamsPlot() {
     <>
       <div className="flex justify-center mb-4 px-2">
         <div className="flex flex-wrap justify-center gap-1 sm:gap-0 sm:inline-flex sm:rounded-md sm:shadow-sm" role="group">
-          <button onClick={() => setPlotType("overall")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "overall" ? "bg-blue-500 text-white" : "bg-white text-gray-700"} rounded-lg sm:rounded-none sm:rounded-l-lg`}>
+          <button onClick={() => setPlotType("overall")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "overall" ? "bg-blue-500 text-white" : "bg-base-100 text-base-content"} rounded-lg sm:rounded-none sm:rounded-l-lg`}>
             Overall
           </button>
-          <button onClick={() => setPlotType("classification")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "classification" ? "bg-blue-500 text-white" : "bg-white text-gray-700"} rounded-lg sm:rounded-none sm:border-l-0`}>
+          <button onClick={() => setPlotType("classification")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "classification" ? "bg-blue-500 text-white" : "bg-base-100 text-base-content"} rounded-lg sm:rounded-none sm:border-l-0`}>
             Classification
           </button>
-          <button onClick={() => setPlotType("sequenceTagging")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "sequenceTagging" ? "bg-blue-500 text-white" : "bg-white text-gray-700"} rounded-lg sm:rounded-none sm:border-l-0`}>
+          <button onClick={() => setPlotType("sequenceTagging")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "sequenceTagging" ? "bg-blue-500 text-white" : "bg-base-100 text-base-content"} rounded-lg sm:rounded-none sm:border-l-0`}>
             Seq. Tagging
           </button>
-          <button onClick={() => setPlotType("qa")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "qa" ? "bg-blue-500 text-white" : "bg-white text-gray-700"} rounded-lg sm:rounded-none sm:border-l-0`}>
+          <button onClick={() => setPlotType("qa")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "qa" ? "bg-blue-500 text-white" : "bg-base-100 text-base-content"} rounded-lg sm:rounded-none sm:border-l-0`}>
             QA
           </button>
-          <button onClick={() => setPlotType("similarity")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "similarity" ? "bg-blue-500 text-white" : "bg-white text-gray-700"} rounded-lg sm:rounded-none sm:rounded-r-lg sm:border-l-0`}>
+          <button onClick={() => setPlotType("similarity")} className={`px-3 py-1.5 text-xs sm:text-sm font-medium border ${plotType === "similarity" ? "bg-blue-500 text-white" : "bg-base-100 text-base-content"} rounded-lg sm:rounded-none sm:rounded-r-lg sm:border-l-0`}>
             Similarity
           </button>
         </div>

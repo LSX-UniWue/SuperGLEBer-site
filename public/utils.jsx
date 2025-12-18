@@ -1,13 +1,11 @@
 import { useState } from "react";
-import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-import "/styles/globals.css";
 
 export function formatter_avg(cell, formatterParams) {
   let value = cell.getValue();
   let progressWidth = ((value - formatterParams.min) / (formatterParams.max - formatterParams.min)) * 100;
   let html = `<div style="position: relative; width: 100%; height: 100%; font-size: 14px;">
                         <div style="position: absolute; width: ${progressWidth}%; height: 100%; background-color: ${formatterParams.color};"></div>
-                        <div style="position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: black;">
+                        <div style="position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
                             ${value}
                         </div>
                     </div>`;

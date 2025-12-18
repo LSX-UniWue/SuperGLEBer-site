@@ -2,7 +2,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
-  themes: light --default;
+  themes: light --default, dark --prefersdark;
 }
 
 
@@ -34,4 +34,35 @@ html, body {
 
 .custom-table-style .tabulator .tabulator-header .tabulator-col, .tabulator .tabulator-col {
     border-right: none;
+}
+
+/* Dark mode styles for filter controls */
+@media (prefers-color-scheme: dark) {
+    select.bg-white,
+    input.border-gray-300 {
+        background-color: #1d232a !important;
+        color: #a6adbb !important;
+        border-color: #374151 !important;
+    }
+
+    button.bg-gray-200 {
+        background-color: #374151 !important;
+        color: #a6adbb !important;
+        border-color: #4b5563 !important;
+    }
+
+    button.bg-gray-200:hover {
+        background-color: #4b5563 !important;
+    }
+
+    button.bg-white {
+        background-color: #1d232a !important;
+        color: #a6adbb !important;
+        border-color: #374151 !important;
+    }
+
+    .custom-table-style .tabulator-page.active {
+        background-color: #374151 !important;
+        border-color: #3b82f6 !important;
+    }
 }

@@ -1,10 +1,11 @@
 import "../styles/globals.css";
+import TabulatorDarkMode from "./TabulatorDarkMode";
 
 let FONT_HEAD = "20px";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en">
       <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
         <link rel="icon" href="/SuperGLEBer-site/bernd.png" />
@@ -12,6 +13,7 @@ export default function RootLayout({ children }) {
       </head>
 
       <body>
+        <TabulatorDarkMode />
         <div id="__next" className="flex flex-col h-full">
           <div className="main-content">
             <NavBar />
@@ -26,8 +28,6 @@ export default function RootLayout({ children }) {
 
 export function NavBar() {
   const dropdownStyle = {
-    backgroundColor: "white",
-    color: "black",
     zIndex: "1",
     position: "absolute",
   };
@@ -42,7 +42,7 @@ export function NavBar() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
               </svg>
             </div>
-            <ul tabIndex="0" className="menu menu-sm dropdown-content mt-3 p-2 rounded-box w-52" style={dropdownStyle}>
+            <ul tabIndex="0" className="menu menu-sm dropdown-content mt-3 p-2 rounded-box w-52 bg-base-100 text-base-content shadow-lg" style={dropdownStyle}>
               <li>
                 <a>Tasks</a>
                 <ul className="p-2">
@@ -91,7 +91,7 @@ export function NavBar() {
             <li>
               <details>
                 <summary style={{ fontSize: FONT_HEAD }}>Tasks</summary>
-                <ul className="p-2 text-black" style={{ ...dropdownStyle, display: "flex", flexDirection: "column", padding: "5px" }}>
+                <ul className="p-2 bg-base-100 text-base-content shadow-lg rounded-box" style={{ ...dropdownStyle, display: "flex", flexDirection: "column", padding: "5px" }}>
                   <li>
                     <a href="./classification">Classification</a>
                   </li>
@@ -112,7 +112,7 @@ export function NavBar() {
                 <summary style={{ fontSize: FONT_HEAD }}>
                   <a href="./leaderboard_v1">Leaderboard</a>
                 </summary>
-                <ul className="p-2 text-black" style={{ ...dropdownStyle, display: "flex", flexDirection: "column", padding: "5px" }}>
+                <ul className="p-2 bg-base-100 text-base-content shadow-lg rounded-box" style={{ ...dropdownStyle, display: "flex", flexDirection: "column", padding: "5px" }}>
                   <li>
                     <a href="./leaderboard_v1">Leaderboard v1</a>
                   </li>

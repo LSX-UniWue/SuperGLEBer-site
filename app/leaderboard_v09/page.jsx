@@ -1,8 +1,11 @@
 "use client";
 import React from "react";
-import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
 import "/styles/globals.css";
-import { ReactTabulator } from "react-tabulator";
+import dynamic from "next/dynamic";
+
+const ReactTabulator = dynamic(() => import("react-tabulator").then((mod) => mod.ReactTabulator), {
+  ssr: false,
+});
 import data from "/public/results.json";
 import { headerMenu, useTableFilter, formatter_avg } from "/public/utils";
 import { computeAverage, computeGlobalAvgClass, computeGlobalAvgSeq, computeLocalAvgClass, computeLocalAvgSeq } from "/public/averages";
