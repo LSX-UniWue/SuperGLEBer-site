@@ -69,7 +69,7 @@ export function NavBar() {
             </div>
             <ul tabIndex="0" className="menu menu-sm dropdown-content mt-3 p-2 rounded-box w-52 bg-base-100 text-base-content shadow-lg" style={dropdownStyle}>
               <li>
-                <a>Tasks</a>
+                <span className="font-semibold pointer-events-none">Tasks</span>
                 <ul className="p-2">
                   <li>
                     <a href="./classification">Classification</a>
@@ -97,10 +97,10 @@ export function NavBar() {
                 </ul>
               </li>
               <li style={{ fontSize: FONT_HEAD }}>
-                <a>Paper</a>
+                <a href="https://aclanthology.org/2024.naacl-long.438/" target="_blank">Paper</a>
               </li>
               <li style={{ fontSize: FONT_HEAD }}>
-                <a>Code</a>
+                <a href="https://github.com/LSX-UniWue/SuperGLEBer" target="_blank">Code</a>
               </li>
               <li style={{ fontSize: FONT_HEAD }}>
                 <a href="./submit">Submit</a>
