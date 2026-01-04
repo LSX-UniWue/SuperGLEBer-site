@@ -83,6 +83,9 @@ export function NavBar() {
                   <li>
                     <a href="./qa">Question Answering</a>
                   </li>
+                       <li>
+                    <a href="./germeval2025">Germeval 2025</a>
+                  </li>
                 </ul>
               </li>
               <li style={{ fontSize: FONT_HEAD }}>
@@ -90,6 +93,9 @@ export function NavBar() {
                 <ul className="p-2">
                   <li>
                     <a href="./leaderboard_v1">Leaderboard v1</a>
+                  </li>
+                  <li>
+                    <a href="./leaderboard_germeval_2025">GermEval 2025</a>
                   </li>
                   <li>
                     <a href="./leaderboard_v09">Leaderboard v0.9</a>
@@ -129,6 +135,9 @@ export function NavBar() {
                   <li>
                     <a href="./qa">Question Answering</a>
                   </li>
+                     <li>
+                    <a href="./germeval2025">Germeval 2025</a>
+                  </li>
                 </ul>
               </details>
             </li>
@@ -140,6 +149,9 @@ export function NavBar() {
                 <ul className="p-2 bg-base-100 text-base-content shadow-lg rounded-box" style={{ ...dropdownStyle, display: "flex", flexDirection: "column", padding: "5px" }}>
                   <li>
                     <a href="./leaderboard_v1">Leaderboard v1</a>
+                  </li>
+                  <li>
+                    <a href="./leaderboard_germeval_2025">GermEval 2025</a>
                   </li>
                   <li>
                     <a href="./leaderboard_v09">Leaderboard v0.9</a>
